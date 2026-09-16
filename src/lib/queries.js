@@ -45,3 +45,46 @@ export async function getAllStories() {
 
   return data
 }
+
+export async function getFeaturedProject() {
+  const { data, error } = await supabase
+    .from('projects')
+    .select(`
+      *,
+      project_technologies (
+        technologies (*)
+      )
+    `)
+    .eq('is_published', true)
+    .order('is_featured', { ascending: false })
+    .order('sort_order', { ascending: true })
+    .limit(1)
+    .maybeSingle()
+
+  if (error) {
+    console.error('Error fetching featured project:', error)
+    return null
+  }
+
+  return data
+}
+
+export async function getAllProjects() {
+  const { data, error } = await supabase
+    .from('projects')
+    .select(`
+      *,
+      project_technologies (
+        technologies (*)
+      )
+    `)
+    .eq('is_published', true)
+    .order('sort_order', { ascending: true })
+
+  if (error) {
+    console.error('Error fetching projects:', error)
+    return []
+  }
+
+  return data
+}

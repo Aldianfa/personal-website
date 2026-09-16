@@ -3,58 +3,92 @@ import { motion } from 'framer-motion'
 
 function StoryCard({ story, index = 0 }) {
   const hasImage = Boolean(story.cover_image)
+  const chapterNumber = String(index + 1).padStart(2, '0')
 
   return (
     <motion.div
-      initial={{ opacity: 0, x: -16 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.5, delay: Math.min(index * 0.05, 0.2), ease: [0.4, 0.0, 0.2, 1] }}
-      className="relative pl-10 pb-14 last:pb-0 md:pl-12"
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{
+        duration: 0.6,
+        delay: Math.min(index * 0.05, 0.2),
+        ease: [0.16, 1, 0.3, 1],
+      }}
+      className="h-full"
     >
-      <span
-        className={`absolute left-0 top-3 -translate-x-1/2 rounded-full ring-8 ring-paper ${
-          story.is_featured ? 'h-5 w-5 bg-panel' : 'h-3 w-3 bg-accent'
-        }`}
-      />
-
       <Link
         to={`/story/${story.slug}`}
-        className={`group block overflow-hidden rounded-3xl border border-ink/10 bg-white transition duration-500 hover:-translate-y-1 hover:border-accent/35 hover:shadow-[0_24px_80px_rgba(29,29,31,0.12)] ${
-          story.is_featured ? 'ring-1 ring-accent/25' : ''
-        }`}
+        className="group relative flex h-full flex-col justify-between overflow-hidden rounded-[1.75rem] border border-black/[0.06] bg-white p-6 shadow-[0_2px_16px_rgba(0,0,0,0.03)] transition-all duration-500 ease-out hover:-translate-y-1 hover:border-black/15 hover:shadow-[0_20px_50px_rgba(0,0,0,0.07)] md:p-7"
       >
-        <div className={hasImage ? 'p-5 pb-0' : 'p-6 md:p-8'}>
-          <div className="flex flex-wrap items-center gap-2 text-xs font-medium uppercase tracking-[0.16em] text-muted">
-            {story.period_label && <span>{story.period_label}</span>}
-            {story.category && (
-              <>
-                <span className="text-ink/25">/</span>
-                <span>{story.category}</span>
-              </>
-            )}
+        <div>
+          {/* Top Apple Meta Row */}
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center gap-1.5">
+              <span className="rounded-full bg-black/[0.04] px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-muted">
+                CH {chapterNumber}
+              </span>
+              {story.period_label && (
+                <span className="rounded-full bg-black/[0.03] px-2.5 py-0.5 text-[11px] font-medium text-ink/70">
+                  {story.period_label}
+                </span>
+              )}
+              {story.category && (
+                <span className="rounded-full bg-accent/10 px-2.5 py-0.5 text-[11px] font-semibold text-accent">
+                  {story.category}
+                </span>
+              )}
+            </div>
+
             {story.is_featured && (
-              <span className="rounded-full bg-accent/10 px-3 py-1 text-accent normal-case tracking-normal">
+              <span className="flex items-center gap-1 rounded-full bg-amber-500/10 px-2.5 py-0.5 text-[11px] font-semibold text-amber-600">
+                <span className="h-1.5 w-1.5 rounded-full bg-amber-500" />
                 Featured
               </span>
             )}
           </div>
 
-          <h3 className="mt-4 text-2xl font-semibold leading-tight transition-colors group-hover:text-accent md:text-3xl">
+          {/* Title & Excerpt */}
+          <h3 className="mt-4 text-xl font-bold tracking-tight text-ink transition-colors duration-300 group-hover:text-accent md:text-2xl">
             {story.title}
           </h3>
-          <p className="mt-3 text-muted leading-relaxed">{story.short_summary}</p>
+          <p className="mt-2 text-sm leading-relaxed text-muted line-clamp-3">
+            {story.short_summary}
+          </p>
         </div>
 
+        {/* Media Thumbnail */}
         {hasImage && (
-          <div className="m-5 mt-6 overflow-hidden rounded-2xl bg-surface aspect-[16/9]">
+          <div className="relative mt-5 aspect-[16/9] w-full overflow-hidden rounded-2xl border border-black/[0.04] bg-[#F5F5F7]">
             <img
               src={story.cover_image}
               alt={story.title}
-              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+              loading="lazy"
             />
           </div>
         )}
+
+        {/* Apple Arrow Action Bar */}
+        <div className="mt-5 flex items-center justify-between border-t border-black/[0.04] pt-4">
+          <span className="text-xs font-semibold text-muted transition-colors group-hover:text-ink">
+            Read chapter
+          </span>
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#F5F5F7] text-ink transition-all duration-300 group-hover:bg-ink group-hover:text-white group-hover:translate-x-1">
+            <svg
+              className="h-3.5 w-3.5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </div>
+        </div>
       </Link>
     </motion.div>
   )

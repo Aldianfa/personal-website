@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { getStoryBySlug } from '../lib/queries'
+import NavBar from '../components/NavBar'
 import StorySection from '../components/story/StorySection'
 
 function MetadataChips({ story }) {
@@ -50,6 +51,7 @@ function StoryDetail() {
 
   return (
     <article className="min-h-screen bg-paper">
+      <NavBar />
       <section className="px-6 pt-8 pb-16 md:pt-10 md:pb-24">
         <div className="mx-auto max-w-6xl">
           <Link
