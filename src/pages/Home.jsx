@@ -442,21 +442,7 @@ function Home() {
                 <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">
                   Curious about me?
                 </p>
-                <span className="rounded-full bg-accent/10 p-1.5 text-accent transition duration-300 group-hover:bg-accent group-hover:text-white group-hover:translate-y-0.5">
-                  <svg
-                    className="h-4 w-4"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                    <polyline points="7 10 12 15 17 10" />
-                    <line x1="12" y1="15" x2="12" y2="3" />
-                  </svg>
-                </span>
+
               </div>
               <div>
                 <h3 className="text-2xl font-semibold leading-tight">Download me</h3>
