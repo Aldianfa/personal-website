@@ -10,6 +10,7 @@ const Stories = lazy(() => import('./pages/Stories'))
 const Work = lazy(() => import('./pages/Work'))
 const ProjectDetail = lazy(() => import('./pages/ProjectDetail'))
 const StoryDetail = lazy(() => import('./pages/StoryDetail'))
+const FontPreview = lazy(() => import('./pages/FontPreview'))
 
 function AnimatedRoutes() {
   const location = useLocation()
@@ -61,6 +62,15 @@ function AnimatedRoutes() {
             </PageTransition>
           }
         />
+        <Route
+          path="/fonts"
+          element={
+            <PageTransition key="fonts">
+              <FontPreview />
+            </PageTransition>
+          }
+        />
+        <Route path="/font-preview" element={<Navigate to="/fonts" replace />} />
       </Routes>
     </AnimatePresence>
   )

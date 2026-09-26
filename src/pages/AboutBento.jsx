@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence, MotionConfig, useReducedMotion } from 'framer-motion'
 import NavBar from '../components/NavBar'
-import JourneyPhotoStack from '../components/JourneyPhotoStack'
 
 const WORK_EXPERIENCES = [
   {
@@ -285,7 +284,48 @@ function AboutBento() {
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-[320px_1fr] xl:grid-cols-[340px_1fr]">
           {/* ================= LEFT COLUMN: Fixed Profile & Info ================= */}
           <div className="flex flex-col gap-5">
-            <JourneyPhotoStack onReadMore={() => openSection('about')} />
+            {/* 1. Full-Bleed Portrait Photo Card (Borderless) */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -3, transition: hoverSpring }}
+              className="group relative aspect-3/4 w-full overflow-hidden rounded-[2rem] bg-panel text-white shadow-sm transition-shadow duration-500 hover:shadow-[0_24px_80px_rgba(29,29,31,0.12)]"
+            >
+              {/* Full-bleed Portrait Photo */}
+              <img
+                src="/profile.jpg"
+                alt="Izzul"
+                className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+              />
+
+              {/* Gradient Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/15 pointer-events-none" />
+
+              {/* Top Badge */}
+              <div className="relative z-10 flex items-center justify-between p-5">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-md border border-white/20 shadow-sm">
+                  About Me
+                </span>
+                <span className="rounded-full bg-white/15 p-1.5 text-white backdrop-blur-md">
+                  <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="7" y1="17" x2="17" y2="7" />
+                    <polyline points="7 7 17 7 17 17" />
+                  </svg>
+                </span>
+              </div>
+
+              {/* Bottom Info directly on Photo */}
+              <div className="absolute bottom-0 left-0 right-0 z-10 p-5">
+                <p className="text-xs font-medium uppercase tracking-[0.16em] text-white/70">
+                  Behind the scenes
+                </p>
+                <h3 className="mt-0.5 text-xl font-bold text-white">Who is Izzul?</h3>
+                <p className="mt-1 text-xs leading-relaxed text-white/80 line-clamp-2">
+                  Building systems, learning through experiments, and sharing stories.
+                </p>
+              </div>
+            </motion.div>
 
             {/* 2. Personal Info & Contact Card */}
             <motion.div

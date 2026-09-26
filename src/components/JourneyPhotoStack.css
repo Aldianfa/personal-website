@@ -1,40 +1,122 @@
-.journey-photos { min-width: 0; padding: 8px 28px 0 0; }
-.journey-stack { position: relative; width: 100%; max-width: 360px; aspect-ratio: 1; margin: 0 auto; perspective: 1000px; }
-.journey-photo { position: absolute; inset: 0; overflow: hidden; border: 3px solid #ffffffe0; border-radius: 36px; background: var(--color-surface); translate: 0 0; backface-visibility: hidden; transition: transform 500ms cubic-bezier(.22,1,.36,1), translate 700ms cubic-bezier(.22,1,.36,1), box-shadow 700ms cubic-bezier(.22,1,.36,1); }
-.journey-photo[data-position="0"] { transform: translate3d(0,0,0) scale(1) rotate(0); box-shadow: 0 22px 35px -15px #0005; }
-.journey-photo[data-position="1"] { transform: translate3d(16px,16px,-40px) scale(.95) rotate(3deg); box-shadow: 0 16px 24px -12px #0004; }
-.journey-photo[data-position="2"] { transform: translate3d(32px,32px,-80px) scale(.9) rotate(6deg); box-shadow: 0 10px 18px -8px #0004; }
-.journey-photo img { width: 100%; height: 100%; object-fit: cover; }
-.journey-photo-caption { position: absolute; inset: 35% 0 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 24px; background: linear-gradient(transparent, #000b); color: white; }
-.journey-photo-caption h3 { font-size: clamp(18px,2vw,25px); font-weight: 600; line-height: 1.2; }
-.journey-photo-caption p { margin-top: 8px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #ffffffc9; }
-.journey-next { position: absolute; inset: 0; z-index: 40; border-radius: 36px; cursor: pointer; }
-.journey-album { position: absolute; top: 20px; left: 20px; z-index: 50; display: grid; place-items: center; width: 60px; height: 60px; border-radius: 18px; border: 1px solid #ffffff80; background: #ffffff30; backdrop-filter: blur(12px); transition: transform 500ms cubic-bezier(.22,1,.36,1); }
-
-.journey-next:focus-visible, .journey-album:focus-visible, .journey-photo-controls button:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 5px; }
-.journey-photo-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; padding: 32px 0 8px; font-size: 11px; color: var(--color-muted); }
-.journey-photo-controls button { min-height: 40px; color: var(--color-accent); cursor: pointer; }
-@media (hover: hover) and (pointer: fine) {
-  /* Delay only the hover lift; photo cycling keeps its own timing. */
-  .journey-photo[data-position="0"] { transition-delay: 0ms, 160ms, 0ms; }
-  .journey-photo[data-position="1"] { transition-delay: 0ms, 80ms, 0ms; }
-  .journey-photo[data-position="2"] { transition-delay: 0ms, 0ms, 0ms; }
-  .journey-stack:hover .journey-photo[data-position="0"] {
-    translate: 0 -14px;
-    transition-delay: 0ms, 0ms, 0ms;
-  }
-  .journey-stack:hover .journey-photo[data-position="1"] {
-    translate: 0 -12px;
-    transition-delay: 0ms, 140ms, 0ms;
-  }
-  .journey-stack:hover .journey-photo[data-position="2"] {
-    translate: 0 -10px;
-    transition-delay: 0ms, 280ms, 0ms;
-  }
-  .journey-album:hover { transform: scale(1.035); }
+.journey-photos {
+  min-width: 0;
+  padding: 4px 16px 0 0;
+  user-select: none;
 }
-@media (prefers-reduced-motion: reduce) {
-  .journey-photo, .journey-album { transition: none; }
-  .journey-stack:hover .journey-photo[data-position] { translate: 0 0; transition: none; }
-  .journey-album:hover { transform: none; }
+
+.journey-stack {
+  position: relative;
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 1;
+  margin: 0 auto;
+}
+
+.journey-photo {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border: 3px solid rgba(255, 255, 255, 0.95);
+  border-radius: 32px;
+  background: var(--color-surface);
+  box-shadow: 0 16px 36px -12px rgba(29, 29, 31, 0.16);
+  will-change: transform, opacity;
+}
+
+.journey-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* Subtle dark gradient vignette for readable caption */
+.journey-photo-caption {
+  position: absolute;
+  inset: 45% 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 18px 20px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.3) 65%, transparent 100%);
+  color: white;
+  pointer-events: none;
+}
+
+.journey-photo-caption h3 {
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.journey-photo-caption p {
+  margin-top: 3px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.journey-next {
+  position: absolute;
+  inset: 0;
+  z-index: 35;
+  border-radius: 32px;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+/* Cupertino-style iCloud album badge */
+.journey-album {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 6px 18px -4px rgba(0, 0, 0, 0.12);
+  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.journey-album:hover {
+  transform: scale(1.06);
+}
+
+/* Bottom Controls */
+.journey-photo-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 20px 4px 4px;
+  font-size: 11px;
+  color: var(--color-muted);
+}
+
+.journey-photo-controls button {
+  color: var(--color-accent);
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: opacity 200ms ease;
+}
+
+.journey-photo-controls button:hover {
+  opacity: 0.8;
+}
+
+.journey-next:focus-visible,
+.journey-album:focus-visible,
+.journey-photo-controls button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
 }

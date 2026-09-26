@@ -4,6 +4,7 @@ import { motion } from 'framer-motion'
 import { getAllStories, getFeaturedProject } from '../lib/queries'
 import NavBar from '../components/NavBar'
 import SpotifyCard from '../components/SpotifyCard'
+import JourneyPhotoStack from '../components/JourneyPhotoStack'
 
 function BentoCard({
   children,
@@ -248,31 +249,23 @@ function Home() {
           | Download Me (col 1, row 3)  | Featured Project (col 2, row 2-3) | Spotify (col 3, row 3)        |
         */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1.25fr_1fr] lg:auto-rows-[14rem]">
-          {/* 1. Photo Tall: Col 1, Row 1-2 */}
+          {/* 1. Photo Stack: Col 1, Row 1-2 */}
           <BentoCard
-            to="/about"
             delay={0}
             className="lg:col-start-1 lg:row-start-1 lg:row-span-2"
           >
-            <div className="relative flex h-full min-h-[28rem] flex-col justify-between overflow-hidden bg-panel text-white lg:min-h-0">
-              {/* Full-bleed Portrait Photo */}
-              <img
-                src="/photos/profile.jpg"
-                alt="Izzul"
-                className="absolute inset-0 h-full w-full object-cover object-center transition duration-700 ease-out group-hover:scale-105"
-              />
-
-              {/* Elegant Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/20" />
-
-              {/* Top Badge & Arrow */}
-              <div className="relative z-10 flex items-center justify-between p-6">
-                <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-md">
-                  About Me
+            <div className="relative flex h-full min-h-[28rem] flex-col justify-between p-6 lg:min-h-0">
+              <div className="flex items-center justify-between">
+                <span className="rounded-full bg-accent/10 px-3 py-1 text-xs font-semibold text-accent">
+                  Memories & Journey
                 </span>
-                <span className="rounded-full bg-white/15 p-2 text-white backdrop-blur-md transition duration-300 group-hover:bg-white/30">
+                <Link
+                  to="/about"
+                  className="rounded-full bg-black/5 p-1.5 text-muted transition-all duration-300 hover:bg-accent hover:text-white"
+                  title="About Me"
+                >
                   <svg
-                    className="h-4 w-4"
+                    className="h-3.5 w-3.5"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -283,18 +276,17 @@ function Home() {
                     <line x1="7" y1="17" x2="17" y2="7" />
                     <polyline points="7 7 17 7 17 17" />
                   </svg>
-                </span>
+                </Link>
               </div>
 
-              {/* Bottom Info */}
-              <div className="relative z-10 p-6">
-                <p className="text-xs font-medium uppercase tracking-[0.16em] text-white/70">
-                  Behind the scenes
-                </p>
-                <h3 className="mt-1 text-2xl font-semibold text-white">Who is Izzul?</h3>
-                <p className="mt-2 text-sm leading-relaxed text-white/80 line-clamp-2">
-                  Building systems, learning through experiments, and sharing stories.
-                </p>
+              {/* Interactive Journey Photo Stack */}
+              <div className="my-auto py-2">
+                <JourneyPhotoStack />
+              </div>
+
+              <div className="flex items-center justify-between border-t border-black/5 pt-3 text-xs text-muted">
+                <span>Click photo to cycle</span>
+                <span className="font-semibold text-ink">Photo Memories</span>
               </div>
             </div>
           </BentoCard>
