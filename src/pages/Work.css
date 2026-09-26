@@ -34,13 +34,9 @@
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .work-grid:has(> .work-card:hover) > .work-card:not(:hover):not(:focus-within) {
+  .work-grid:has(.work-card-arrow:hover) > .work-card:not(:has(.work-card-arrow:hover)) {
     filter: blur(3px) opacity(0.6);
   }
-}
-
-.work-grid:has(:focus-visible) > .work-card:not(:focus-within):not(:hover) {
-  filter: blur(3px) opacity(0.6);
 }
 
 .work-card:hover,

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { getAllStories, getFeaturedProject } from '../lib/queries'
 import NavBar from '../components/NavBar'
+import SpotifyCard from '../components/SpotifyCard'
 
 function BentoCard({
   children,
@@ -244,7 +245,7 @@ function Home() {
           Bento Grid Layout (3x3 on lg):
           | Photo Tall (col 1, row 1-2) | Curiosity Wide (col 2, row 1)    | LinkedIn (col 3, row 1)       |
           | Photo Tall (col 1, row 1-2) | Featured Project (col 2, row 2-3) | Small Status 2 (col 3, row 2) |
-          | Download Me (col 1, row 3)  | Featured Project (col 2, row 2-3) | Contact (col 3, row 3)        |
+          | Download Me (col 1, row 3)  | Featured Project (col 2, row 2-3) | Spotify (col 3, row 3)        |
         */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1.25fr_1fr] lg:auto-rows-[14rem]">
           {/* 1. Photo Tall: Col 1, Row 1-2 */}
@@ -323,16 +324,15 @@ function Home() {
             target="_blank"
             delay={0.1}
             className="lg:col-start-3 lg:row-start-1"
-            cardClassName="transition-all duration-700 ease-out hover:shadow-[0_24px_60px_rgba(0,119,181,0.35)]"
+            cardClassName="linkedin-card transition-all duration-700 ease-out hover:shadow-[0_24px_60px_rgba(0,119,181,0.35)]"
           >
             <div className="relative flex h-full min-h-52 flex-col justify-between overflow-hidden p-6 lg:min-h-0">
-              {/* Solid #0077B5 expansion from Logo downwards (No gradients) */}
-              <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[2rem]">
-                {/* Base solid blue fade */}
-                <div className="absolute inset-0 bg-[#0077B5] opacity-0 transition-opacity duration-700 ease-out group-hover:opacity-100" />
-
-                {/* Expanding solid circle from Logo downwards */}
-                <div className="absolute left-9 top-9 h-14 w-14 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#0077B5] opacity-0 blur-md transition-all duration-800 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[10] group-hover:opacity-100" />
+              <div className="linkedin-water" aria-hidden="true">
+                {[0, 1].map((layer) => (
+                  <svg key={layer} className={`linkedin-wave linkedin-wave-${layer}`} viewBox="0 0 1200 400" preserveAspectRatio="none">
+                    <path d="M0 40 Q150 0 300 40 T600 40 T900 40 T1200 40 V400 H0Z" fill="currentColor" />
+                  </svg>
+                ))}
               </div>
 
               {/* Top Header */}
@@ -538,25 +538,12 @@ function Home() {
             </div>
           </BentoCard>
 
-          {/* 7. Contact: Col 3, Row 3 */}
+          {/* 7. Spotify: Col 3, Row 3 */}
           <BentoCard
-            href="mailto:hi@example.com"
             delay={0.3}
             className="lg:col-start-3 lg:row-start-3"
           >
-            <div className="flex h-full min-h-52 flex-col justify-between p-6 lg:min-h-0">
-              <div>
-                <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">
-                  Contact
-                </p>
-                <p className="mt-3 rounded-[1.25rem] bg-white px-4 py-3 text-sm font-semibold leading-tight">
-                  want the short version? send me a message.
-                </p>
-              </div>
-              <span className="self-end rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white">
-                sounds good
-              </span>
-            </div>
+            <SpotifyCard />
           </BentoCard>
         </div>
       </section>

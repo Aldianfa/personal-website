@@ -63,14 +63,35 @@ export default function ProjectDetail() {
                     <h1 className="mt-4 max-w-4xl break-words text-4xl font-semibold leading-tight tracking-tight md:text-5xl">{project.title}</h1>
                     {project.summary && <p className="mt-4 max-w-3xl text-base leading-relaxed text-muted md:text-lg">{project.summary}</p>}
                     <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
-                      {technologies.length > 0 && <ul aria-label="Technologies" className="flex flex-wrap gap-2">{technologies.map((name) => <li key={name} className="rounded-lg border border-black/[0.04] bg-surface px-3 py-2 text-xs text-ink/70">{name}</li>)}</ul>}
-                      {(liveUrl || githubUrl) && <div className="flex flex-wrap gap-3">{liveUrl && <a href={liveUrl} target="_blank" rel="noopener noreferrer" className={`inline-flex min-h-11 items-center rounded-full bg-accent px-5 text-sm font-semibold text-white hover:bg-accent/85 ${focus}`}>Visit project <span className="ml-2" aria-hidden="true">&#8599;</span><span className="sr-only"> (opens in a new tab)</span></a>}{githubUrl && <a href={githubUrl} target="_blank" rel="noopener noreferrer" className={`inline-flex min-h-11 items-center rounded-full bg-surface px-5 text-sm font-semibold hover:bg-ink/10 ${focus}`}>Source code <span className="ml-2" aria-hidden="true">&#8599;</span><span className="sr-only"> (opens in a new tab)</span></a>}</div>}
+                      {(liveUrl || githubUrl) && <div className="flex flex-wrap gap-3">{liveUrl && <a href={liveUrl} target="_blank" rel="noopener noreferrer" className={`inline-flex min-h-11 items-center rounded-full bg-accent px-5 text-sm font-semibold text-white hover:bg-accent/85 ${focus}`}>Visit Website <span className="ml-2" aria-hidden="true">&#8599;</span><span className="sr-only"> (opens in a new tab)</span></a>}{githubUrl && <a href={githubUrl} target="_blank" rel="noopener noreferrer" className={`inline-flex min-h-11 items-center rounded-full bg-surface px-5 text-sm font-semibold hover:bg-ink/10 ${focus}`}>Source code <span className="ml-2" aria-hidden="true">&#8599;</span><span className="sr-only"> (opens in a new tab)</span></a>}</div>}
                     </div>
                   </header>
                   <figure className="flex min-h-56 items-center justify-center overflow-hidden rounded-[2rem] bg-surface p-5 md:p-8">
                     {project.cover_image && !imageFailed ? <img src={project.cover_image} alt={`${project.title} preview`} onError={() => setImageFailed(true)} className="max-h-[32rem] w-full rounded-xl object-contain" /> : <figcaption className="py-14 text-center text-sm text-muted">Project preview coming soon.</figcaption>}
                   </figure>
-                  {project.description && <section className="grid gap-5 py-8 md:grid-cols-[1fr_2fr] md:py-10" aria-labelledby="project-overview"><div><p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Behind the build</p><h2 id="project-overview" className="mt-2 text-2xl font-semibold tracking-tight">Project overview</h2></div><div className="space-y-4 text-sm leading-7 text-ink/75 md:text-base">{project.description.split(/\n\s*\n/).filter(Boolean).map((paragraph, index) => <p key={index} className="whitespace-pre-line break-words">{paragraph}</p>)}</div></section>}
+                  <div className="grid gap-6 py-8 md:grid-cols-[1fr_2fr] md:gap-10">
+                    <aside className="space-y-6 self-start rounded-[2rem] border border-black/[0.04] bg-surface p-6" aria-label="Project details">
+                      <section aria-labelledby="project-role">
+                        <h2 id="project-role" className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">My Role</h2>
+                        <p className="mt-3 whitespace-pre-line break-words text-sm leading-relaxed text-ink/80">{project.role?.trim() || 'Role details coming soon.'}</p>
+                      </section>
+                      <section className="border-t border-black/[0.06] pt-5" aria-labelledby="project-tools">
+                        <h2 id="project-tools" className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">Tools</h2>
+                        {technologies.length > 0 ? <ul className="mt-3 flex flex-wrap gap-2">{technologies.map((name) => <li key={name} className="rounded-lg border border-black/[0.04] bg-white px-3 py-2 text-xs text-ink/75">{name}</li>)}</ul> : <p className="mt-3 text-sm text-muted">Tools will be added soon.</p>}
+                      </section>
+                    </aside>
+                    <div className="space-y-8">
+                      {[
+                        { id: 'project-context', title: 'Context', content: project.context, fallback: 'The background behind this project will be added soon.' },
+                        { id: 'project-description', title: 'Description', content: project.description, fallback: 'More details about this project are coming soon.' },
+                      ].map(({ id, title, content, fallback }) => <section key={id} aria-labelledby={id}>
+                        <h2 id={id} className="text-xl font-semibold tracking-tight">{title}</h2>
+                        <div className="mt-3 space-y-4 text-sm leading-7 text-ink/75 md:text-base">
+                          {content?.trim() ? content.split(/\n\s*\n/).filter(Boolean).map((paragraph, index) => <p key={index} className="whitespace-pre-line break-words">{paragraph}</p>) : <p className="text-muted">{fallback}</p>}
+                        </div>
+                      </section>)}
+                    </div>
+                  </div>
                   {next && <Link to={`/work/${encodeURIComponent(next.slug)}`} className={`mt-6 flex items-center justify-between gap-4 rounded-[2rem] bg-surface p-6 transition-colors hover:bg-ink/[0.08] ${focus}`}><span><span className="block text-xs text-muted">Next project</span><span className="mt-2 block text-xl font-semibold tracking-tight">{next.title}</span></span><span aria-hidden="true" className="text-2xl">&#8594;</span></Link>}
                 </motion.article>}
         </div>
