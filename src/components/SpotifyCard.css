@@ -1,4 +1,30 @@
 .spotify-tile { display: flex; flex-direction: column; justify-content: space-between; gap: 16px; height: 100%; min-height: 208px; padding: 22px; }
+.spotify-tile { position: relative; isolation: isolate; overflow: hidden; }
+.spotify-tile > :not(.spotify-water) { position: relative; z-index: 1; }
+.spotify-water { position: absolute; inset: -25% 0 0; pointer-events: none; transform: translateY(105%); transition: transform 1100ms cubic-bezier(.22, 1, .36, 1); }
+.spotify-wave { position: absolute; bottom: 0; width: 200%; height: 100%; max-width: none; color: #1db954; animation: spotify-wave-drift 6s linear infinite; animation-play-state: paused; }
+.spotify-wave-0 { color: #73d594; }
+.spotify-wave-1 { bottom: -14px; animation-duration: 8s; animation-direction: reverse; }
+.spotify-tile-label, .spotify-tile-label svg, .spotify-tile-main p, .spotify-tile-bottom { transition: color 450ms ease; }
+.spotify-tile:focus-within .spotify-water { transform: translateY(0); }
+.spotify-tile:focus-within .spotify-wave { animation-play-state: running; }
+.spotify-tile:focus-within .spotify-tile-label,
+.spotify-tile:focus-within .spotify-tile-label svg,
+.spotify-tile:focus-within .spotify-tile-main p,
+.spotify-tile:focus-within .spotify-tile-bottom { color: #123b22; }
+@media (hover: hover) and (pointer: fine) {
+  .spotify-tile:hover .spotify-water { transform: translateY(0); }
+  .spotify-tile:hover .spotify-wave { animation-play-state: running; }
+  .spotify-tile:hover .spotify-tile-label,
+  .spotify-tile:hover .spotify-tile-label svg,
+  .spotify-tile:hover .spotify-tile-main p,
+  .spotify-tile:hover .spotify-tile-bottom { color: #123b22; }
+}
+@keyframes spotify-wave-drift { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .spotify-wave { animation: none; }
+  .spotify-water { transition: none; }
+}
 .spotify-tile-label { display: flex; align-items: center; gap: 8px; color: var(--color-muted); font-size: 10px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
 .spotify-tile-label svg { color: #16863e; flex-shrink: 0; }
 .spotify-tile-note { margin-left: auto; font-size: 9px; letter-spacing: .04em; }

@@ -2,89 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence, MotionConfig, useReducedMotion } from 'framer-motion'
 import NavBar from '../components/NavBar'
-
-// Add more local photo paths here to enable the automatic slideshow.
-const PROFILE_PHOTOS = [
-  { src: '/photos/profile.jpg', alt: 'Izzul' },
-]
-
-function ProfileSlideshow({ onReadMore }) {
-  const [photoIndex, setPhotoIndex] = useState(0)
-  const [paused, setPaused] = useState(false)
-  const [interacting, setInteracting] = useState(false)
-  const reduceMotion = useReducedMotion()
-  const hasMultiplePhotos = PROFILE_PHOTOS.length > 1
-
-  useEffect(() => {
-    if (!hasMultiplePhotos || paused || interacting || reduceMotion) return
-    const timer = window.setInterval(() => {
-      if (!document.hidden) setPhotoIndex((index) => (index + 1) % PROFILE_PHOTOS.length)
-    }, 4500)
-    return () => window.clearInterval(timer)
-  }, [hasMultiplePhotos, paused, interacting, reduceMotion])
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 18 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className="group relative overflow-hidden rounded-[2rem] bg-panel text-white transition-shadow duration-700 hover:shadow-[0_24px_80px_rgba(29,29,31,0.1)]"
-      onMouseEnter={() => setInteracting(true)}
-      onMouseLeave={() => setInteracting(false)}
-      onFocusCapture={() => setInteracting(true)}
-      onBlurCapture={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget)) setInteracting(false)
-      }}
-      role="region"
-      aria-label="Photos of Izzul"
-      aria-roledescription={hasMultiplePhotos ? 'carousel' : undefined}
-    >
-      <div className="relative flex min-h-[28rem] flex-col justify-between overflow-hidden">
-        <AnimatePresence initial={false}>
-          <motion.img
-            key={PROFILE_PHOTOS[photoIndex].src}
-            src={PROFILE_PHOTOS[photoIndex].src}
-            alt={PROFILE_PHOTOS[photoIndex].alt}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: reduceMotion ? 0 : 0.7 }}
-            className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-          />
-        </AnimatePresence>
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/20" />
-        <div className="relative z-10 flex items-center justify-between p-6">
-          <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-md">About Me</span>
-          <button type="button" onClick={onReadMore} aria-label="Read more about Izzul" className="rounded-full bg-white/15 p-2 text-white backdrop-blur-md transition duration-300 hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
-            <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <line x1="7" y1="17" x2="17" y2="7" />
-              <polyline points="7 7 17 7 17 17" />
-            </svg>
-          </button>
-        </div>
-        <div className="relative z-10 p-6">
-          <p className="text-xs font-medium uppercase tracking-[0.16em] text-white/70">Behind the scenes</p>
-          <h3 className="mt-1 text-2xl font-semibold text-white">Who is Izzul?</h3>
-          <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-white/80">Building systems, learning through experiments, and sharing stories.</p>
-          {hasMultiplePhotos && (
-            <div className="mt-4 flex flex-wrap items-center gap-2">
-              {PROFILE_PHOTOS.map((photo, index) => (
-                <button key={photo.src} type="button" aria-label={`Show photo ${index + 1}`} aria-pressed={index === photoIndex} onClick={() => { setPhotoIndex(index); setPaused(true) }} className="flex h-8 w-8 items-center justify-center rounded-full bg-accent/30 hover:bg-accent focus-visible:outline-2 focus-visible:outline-white">
-                  <span className={`h-1.5 rounded-full bg-white ${index === photoIndex ? 'w-4' : 'w-1.5 opacity-60'}`} />
-                </button>
-              ))}
-              {!reduceMotion && (
-                <button type="button" onClick={() => setPaused((value) => !value)} className="ml-auto rounded-full bg-accent px-3 py-2 text-xs font-semibold text-white hover:bg-accent/85 focus-visible:outline-2 focus-visible:outline-white">
-                  {paused ? 'Play slideshow' : 'Pause slideshow'}
-                </button>
-              )}
-            </div>
-          )}
-        </div>
-      </div>
-    </motion.div>
-  )
-}
+import JourneyPhotoStack from '../components/JourneyPhotoStack'
 
 const WORK_EXPERIENCES = [
   {
@@ -367,7 +285,7 @@ function AboutBento() {
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-[320px_1fr] xl:grid-cols-[340px_1fr]">
           {/* ================= LEFT COLUMN: Fixed Profile & Info ================= */}
           <div className="flex flex-col gap-5">
-            <ProfileSlideshow onReadMore={() => openSection('about')} />
+            <JourneyPhotoStack onReadMore={() => openSection('about')} />
 
             {/* 2. Personal Info & Contact Card */}
             <motion.div

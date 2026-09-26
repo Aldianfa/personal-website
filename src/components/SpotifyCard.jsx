@@ -26,6 +26,13 @@ export default function SpotifyCard() {
   return (
     <>
       <section aria-label="Spotify playlist" className="spotify-tile">
+        <div className="spotify-water" aria-hidden="true">
+          {[0, 1].map((layer) => (
+            <svg key={layer} className={`spotify-wave spotify-wave-${layer}`} viewBox="0 0 1200 400" preserveAspectRatio="none">
+              <path d="M0 40 Q150 0 300 40 T600 40 T900 40 T1200 40 V400 H0Z" fill="currentColor" />
+            </svg>
+          ))}
+        </div>
         <div className="spotify-tile-label"><SpotifyIcon /><span>Spotify</span><span className="spotify-tile-note">On repeat</span></div>
         <div className="spotify-tile-main">
           <div className="spotify-record" aria-hidden="true"><span /></div>
