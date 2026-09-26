@@ -132,6 +132,12 @@ function About() {
     fetchData()
   }, [])
 
+  useEffect(() => {
+    if (!loading && window.location.hash === '#stories') {
+      document.getElementById('stories')?.scrollIntoView({ block: 'start' })
+    }
+  }, [loading])
+
   const handleCopyEmail = (e) => {
     e.preventDefault()
     navigator.clipboard.writeText('hi@example.com')

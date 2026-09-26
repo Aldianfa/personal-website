@@ -31,7 +31,7 @@ export async function getStoryBySlug(slug) {
   return data
 }
 
-export async function getAllStories() {
+export async function getAllStories({ throwOnError = false } = {}) {
   const { data, error } = await supabase
     .from('story_logs')
     .select('id, title, slug, year, period_label, category, short_summary, cover_image, is_featured')
@@ -40,6 +40,7 @@ export async function getAllStories() {
 
   if (error) {
     console.error('Error fetching stories:', error)
+    if (throwOnError) throw error
     return []
   }
 
@@ -69,7 +70,7 @@ export async function getFeaturedProject() {
   return data
 }
 
-export async function getAllProjects() {
+export async function getAllProjects({ throwOnError = false } = {}) {
   const { data, error } = await supabase
     .from('projects')
     .select(`
@@ -83,6 +84,7 @@ export async function getAllProjects() {
 
   if (error) {
     console.error('Error fetching projects:', error)
+    if (throwOnError) throw error
     return []
   }
 

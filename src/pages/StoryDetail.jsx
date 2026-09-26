@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { getStoryBySlug } from '../lib/queries'
+import { getStoryBySlug, getAllStories } from '../lib/queries'
 import NavBar from '../components/NavBar'
 import StorySection from '../components/story/StorySection'
 
@@ -32,20 +32,40 @@ function MetadataChips({ story }) {
 function StoryDetail() {
   const { slug } = useParams()
   const [story, setStory] = useState(null)
+  const [chapters, setChapters] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    let cancelled = false
+    window.scrollTo({ top: 0, behavior: 'instant' })
     async function fetchData() {
       setLoading(true)
-      const result = await getStoryBySlug(slug)
-      setStory(result)
+      const [storyResult, chaptersResult] = await Promise.allSettled([
+        getStoryBySlug(slug),
+        getAllStories(),
+      ])
+      if (cancelled) return
+      setStory(storyResult.status === 'fulfilled' ? storyResult.value : null)
+      setChapters(chaptersResult.status === 'fulfilled' ? chaptersResult.value : [])
       setLoading(false)
     }
     fetchData()
+    return () => { cancelled = true }
   }, [slug])
 
-  if (loading) return <p className="text-center py-32 text-muted">Loading...</p>
-  if (!story) return <p className="text-center py-32 text-muted">Story not found.</p>
+  if (loading || !story) return (
+    <main className="min-h-screen bg-paper">
+      <NavBar />
+      <div className="px-6 py-32 text-center">
+        <p role="status" className="text-muted">{loading ? 'Loading chapter...' : 'This chapter could not be loaded.'}</p>
+        <Link to="/stories" className="mt-6 inline-block text-sm text-accent hover:underline">Back to all stories</Link>
+      </div>
+    </main>
+  )
+
+  const chapterIndex = chapters.findIndex((chapter) => chapter.slug === slug)
+  const previousChapter = chapterIndex > 0 ? chapters[chapterIndex - 1] : null
+  const nextChapter = chapterIndex >= 0 ? chapters[chapterIndex + 1] : null
 
   const sections = story.story_sections || []
 
@@ -55,7 +75,7 @@ function StoryDetail() {
       <section className="px-6 pt-8 pb-16 md:pt-10 md:pb-24">
         <div className="mx-auto max-w-6xl">
           <Link
-            to="/"
+            to="/stories"
             className="inline-flex items-center rounded-full border border-ink/10 px-4 py-2 text-sm font-medium text-ink/70 transition hover:border-accent/40 hover:text-accent"
           >
             Back to all stories
@@ -105,6 +125,26 @@ function StoryDetail() {
           ))}
         </div>
       </section>
+      <nav aria-label="Chapter navigation" className="mx-auto max-w-3xl px-6 pb-20">
+        <div className="border-t border-ink/10 pt-8">
+          <p className="mb-6 text-xs font-semibold uppercase tracking-[0.16em] text-muted">Continue the journey</p>
+          <div className="flex flex-col gap-8 sm:flex-row sm:justify-between">
+            {previousChapter && (
+              <Link to={`/story/${previousChapter.slug}`} rel="prev" className="group min-w-0 flex-1 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
+                <span className="text-xs text-accent">Previous chapter</span>
+                <span className="mt-2 block break-words text-lg font-semibold transition-colors group-hover:text-accent">{previousChapter.title}</span>
+              </Link>
+            )}
+            {nextChapter && (
+              <Link to={`/story/${nextChapter.slug}`} rel="next" className="group min-w-0 flex-1 rounded-lg sm:text-right focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
+                <span className="text-xs text-accent">Next chapter</span>
+                <span className="mt-2 block break-words text-lg font-semibold transition-colors group-hover:text-accent">{nextChapter.title}</span>
+              </Link>
+            )}
+          </div>
+          <Link to="/stories" className="mt-8 inline-block text-sm text-accent hover:underline">All chapters</Link>
+        </div>
+      </nav>
     </article>
   )
 }

@@ -1,0 +1,170 @@
+.work-gallery {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 48px 22px 22px;
+}
+
+.work-hint {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  margin: 0 20px 8px 0;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.work-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 30px;
+  background: var(--color-surface);
+  filter: blur(0) opacity(1);
+  transition: box-shadow 300ms ease, background-color 300ms ease,
+    filter 350ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .work-grid:has(> .work-card:hover) > .work-card:not(:hover):not(:focus-within) {
+    filter: blur(3px) opacity(0.6);
+  }
+}
+
+.work-grid:has(:focus-visible) > .work-card:not(:focus-within):not(:hover) {
+  filter: blur(3px) opacity(0.6);
+}
+
+.work-card:hover,
+.work-card:focus-within {
+  box-shadow: 0 20px 48px -16px rgb(29 29 31 / 18%);
+  background-color: #f2f2f5;
+}
+
+.work-card:hover .work-card-arrow,
+.work-card:focus-within .work-card-arrow {
+  color: var(--color-ink);
+  border-color: #b5b5ba;
+  background-color: white;
+}
+
+.work-card:hover .work-preview img,
+.work-card:focus-within .work-preview img {
+  transform: scale(1.025);
+}
+
+.work-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 0 28px;
+  padding: 26px 0 18px;
+  flex-shrink: 0;
+  border-bottom: 1px solid rgb(29 29 31 / 10%);
+}
+
+.work-card-header h2 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  overflow-wrap: anywhere;
+}
+
+.work-card-header p {
+  margin: 8px 0 0;
+  font-size: 18px;
+  line-height: 1.45;
+  color: #77777c;
+}
+
+.work-preview {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.work-preview img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 40px 20px 52px;
+  object-fit: contain;
+  object-position: center;
+  transition: transform 450ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.work-card-arrow {
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 58px;
+  height: 58px;
+  margin-top: 2px;
+  border: 3px solid #dedee1;
+  border-radius: 50%;
+  color: #9d9da1;
+  background: rgb(255 255 255 / 35%);
+  transition: color 300ms ease, border-color 300ms ease, background-color 300ms ease;
+}
+
+a.work-card-arrow:hover { color: var(--color-ink); border-color: #b5b5ba; }
+.work-arrow-icon { display: flex; align-items: center; justify-content: center; }
+.work-card-arrow svg { width: 28px; height: 28px; }
+.work-card-arrow[aria-disabled="true"] { cursor: default; }
+.work-source { position: absolute; bottom: 14px; right: 28px; font-size: 11px; color: var(--color-muted); }
+.work-source:hover { color: var(--color-ink); text-decoration: underline; }
+
+@media (prefers-reduced-motion: reduce) {
+  .work-card .work-card-arrow svg {
+    animation: none !important;
+    transform: none !important;
+  }
+  .work-card:hover .work-preview img,
+  .work-card:focus-within .work-preview img,
+  .work-card:hover a.work-card-arrow svg,
+  .work-card:focus-within a.work-card-arrow svg { transform: none; }
+}
+
+.work-preview-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  color: var(--color-muted);
+  font-size: 12px;
+}
+
+.work-preview-empty svg {
+  width: 64px;
+  height: 64px;
+  color: #c5c5cb;
+}
+
+@media (max-width: 767px) {
+  .work-gallery { padding: 36px 16px 16px; }
+  .work-grid { grid-template-columns: minmax(0, 1fr); }
+  .work-card-header { margin: 0 22px; padding-top: 24px; }
+  .work-card-header p { font-size: 15px; }
+  .work-card { aspect-ratio: auto; }
+  .work-card-header h2 { font-size: 24px; }
+  .work-card-arrow { width: 48px; height: 48px; }
+  .work-preview { flex: auto; height: clamp(260px, 75vw, 420px); }
+  .work-preview img { padding: 28px 16px 36px; }
+}

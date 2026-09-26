@@ -323,24 +323,35 @@ function Home() {
             target="_blank"
             delay={0.1}
             className="lg:col-start-3 lg:row-start-1"
+            cardClassName="transition-all duration-700 ease-out hover:shadow-[0_24px_60px_rgba(0,119,181,0.35)]"
           >
-            <div className="flex h-full min-h-52 flex-col justify-between p-6 lg:min-h-0">
-              <div className="flex items-center justify-between">
+            <div className="relative flex h-full min-h-52 flex-col justify-between overflow-hidden p-6 lg:min-h-0">
+              {/* Solid #0077B5 expansion from Logo downwards (No gradients) */}
+              <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[2rem]">
+                {/* Base solid blue fade */}
+                <div className="absolute inset-0 bg-[#0077B5] opacity-0 transition-opacity duration-700 ease-out group-hover:opacity-100" />
+
+                {/* Expanding solid circle from Logo downwards */}
+                <div className="absolute left-9 top-9 h-14 w-14 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#0077B5] opacity-0 blur-md transition-all duration-800 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[10] group-hover:opacity-100" />
+              </div>
+
+              {/* Top Header */}
+              <div className="relative z-10 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <svg
-                    className="h-6 w-6 text-[#0A66C2] transition-transform duration-300 group-hover:scale-110"
+                    className="h-6 w-6 text-[#0077B5] transition-all duration-500 ease-out group-hover:scale-110 group-hover:text-white"
                     viewBox="0 0 24 24"
                     fill="currentColor"
                   >
                     <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25a1.65 1.65 0 1 0 0 3.3 1.65 1.65 0 0 0 0-3.3Z" />
                   </svg>
-                  <span className="text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+                  <span className="text-xs font-semibold uppercase tracking-[0.14em] text-muted transition-colors duration-500 ease-out group-hover:text-blue-100">
                     LinkedIn
                   </span>
                 </div>
-                <span className="rounded-full bg-black/5 p-1.5 text-muted transition group-hover:bg-[#0A66C2] group-hover:text-white">
+                <span className="rounded-full bg-black/5 p-1.5 text-muted transition-all duration-500 ease-out group-hover:bg-white/20 group-hover:text-white group-hover:shadow-sm">
                   <svg
-                    className="h-3.5 w-3.5"
+                    className="h-3.5 w-3.5 transition-transform duration-500 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -353,9 +364,19 @@ function Home() {
                   </svg>
                 </span>
               </div>
-              <div>
-                <p className="text-xl font-semibold leading-tight">Let's connect.</p>
-                <p className="mt-1 text-sm text-muted">
+
+              {/* Bottom Content */}
+              <div className="relative z-10 mt-auto pt-4">
+                <div className="flex items-center gap-2">
+                  <p className="text-xl font-semibold leading-tight text-ink transition-colors duration-500 ease-out group-hover:text-white">
+                    Let's connect.
+                  </p>
+                  {/* Connect Emoji appears only on hover */}
+                  <span className="inline-block select-none text-lg opacity-0 scale-50 -translate-x-2 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-x-0 group-hover:scale-110 group-hover:opacity-100 group-hover:rotate-12">
+                    🤝
+                  </span>
+                </div>
+                <p className="mt-1 text-sm text-muted transition-colors duration-500 ease-out group-hover:text-white/85">
                   Professional updates & network.
                 </p>
               </div>
@@ -436,19 +457,83 @@ function Home() {
             download="CV-Izzul.pdf"
             delay={0.25}
             className="lg:col-start-1 lg:row-start-3"
+            cardClassName="transition-all duration-700 ease-out hover:shadow-[0_24px_60px_rgba(199,210,254,0.5)]"
           >
-            <div className="flex h-full min-h-52 flex-col justify-between p-6 lg:min-h-0">
-              <div className="flex items-center justify-between">
-                <p className="text-xs font-medium uppercase tracking-[0.16em] text-muted">
+            <div className="relative flex h-full min-h-52 flex-col justify-between overflow-hidden p-6 lg:min-h-0">
+              {/* Solid Pastel #E0E7FF expansion on Hover (No gradients) */}
+              <div className="pointer-events-none absolute inset-0 overflow-hidden rounded-[2rem]">
+                {/* Base solid pastel background */}
+                <div className="absolute inset-0 bg-[#E0E7FF] opacity-0 transition-opacity duration-700 ease-out group-hover:opacity-100" />
+
+                {/* Expanding solid pastel circle */}
+                <div className="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#E0E7FF] opacity-0 blur-md transition-all duration-800 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[8] group-hover:opacity-100" />
+              </div>
+
+              {/* Floating Emojis appearing with Smooth Staggered Motion */}
+              <div className="pointer-events-none absolute inset-0 overflow-hidden">
+                {/* Emoji: Top Sparkle */}
+                <span className="absolute right-12 top-4 select-none text-base opacity-0 scale-50 -translate-y-2 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 group-hover:opacity-100 group-hover:rotate-12 group-hover:translate-y-0">
+                  ✨
+                </span>
+                {/* Emoji: Floating Document */}
+                <span className="absolute right-4 bottom-14 select-none text-xl opacity-0 scale-50 translate-x-2 transition-all duration-700 delay-100 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-125 group-hover:opacity-100 group-hover:-rotate-12 group-hover:translate-x-0">
+                  📄
+                </span>
+                {/* Emoji: Rocket */}
+                <span className="absolute left-28 top-3.5 select-none text-sm opacity-0 scale-50 translate-y-2 transition-all duration-700 delay-150 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 group-hover:opacity-100 group-hover:rotate-12 group-hover:translate-y-0">
+                  🚀
+                </span>
+                {/* Emoji: Lightning */}
+                <span className="absolute right-1/3 bottom-5 select-none text-sm opacity-0 scale-50 transition-all duration-700 delay-200 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 group-hover:opacity-90 group-hover:-rotate-6">
+                  ⚡
+                </span>
+              </div>
+
+              {/* Top Header */}
+              <div className="relative z-10 flex items-center justify-between">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted transition-colors duration-500 ease-out group-hover:text-indigo-600">
                   Curious about me?
                 </p>
-
+                <div className="flex items-center gap-1.5 rounded-full bg-black/5 px-2.5 py-1 text-xs font-medium text-muted transition-all duration-500 ease-out group-hover:bg-white/80 group-hover:text-indigo-900 group-hover:shadow-sm">
+                  {/* Icon appears only on hover with smooth fade & float */}
+                  <span className="inline-block text-xs opacity-0 scale-50 -translate-y-1 transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:scale-100 group-hover:opacity-100">
+                    📥
+                  </span>
+                  <span className="font-semibold">CV • PDF</span>
+                </div>
               </div>
-              <div>
-                <h3 className="text-2xl font-semibold leading-tight">Download me</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">
+
+              {/* Main Content */}
+              <div className="relative z-10 mt-auto pt-4">
+                <div className="flex items-center gap-2">
+                  <h3 className="text-2xl font-semibold leading-tight text-ink transition-colors duration-500 ease-out group-hover:text-slate-900">
+                    Download me
+                  </h3>
+                  {/* Title Emoji appears only on hover with spring glide */}
+                  <span className="inline-block select-none text-xl opacity-0 scale-50 -translate-x-2 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:translate-x-0 group-hover:scale-110 group-hover:opacity-100 group-hover:rotate-12">
+                    💼
+                  </span>
+                </div>
+                <p className="mt-2 text-sm leading-relaxed text-muted transition-colors duration-500 ease-out group-hover:text-slate-600">
                   Get my complete CV and experience summary.
                 </p>
+
+                {/* Interactive Action Indicator */}
+                <div className="mt-3 flex items-center gap-1.5 text-xs font-semibold text-accent transition-all duration-500 ease-out group-hover:translate-x-1 group-hover:text-indigo-600">
+                  <span>Click to download</span>
+                  <svg
+                    className="h-3.5 w-3.5 transition-transform duration-500 ease-out group-hover:translate-y-0.5 group-hover:animate-bounce"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <line x1="12" y1="5" x2="12" y2="19" />
+                    <polyline points="19 12 12 19 5 12" />
+                  </svg>
+                </div>
               </div>
             </div>
           </BentoCard>

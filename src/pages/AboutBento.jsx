@@ -8,7 +8,7 @@ const PROFILE_PHOTOS = [
   { src: '/photos/profile.jpg', alt: 'Izzul' },
 ]
 
-function ProfileSlideshow() {
+function ProfileSlideshow({ onReadMore }) {
   const [photoIndex, setPhotoIndex] = useState(0)
   const [paused, setPaused] = useState(false)
   const [interacting, setInteracting] = useState(false)
@@ -55,12 +55,12 @@ function ProfileSlideshow() {
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/20" />
         <div className="relative z-10 flex items-center justify-between p-6">
           <span className="rounded-full bg-white/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-md">About Me</span>
-          <Link to="/about" aria-label="Read more about Izzul" className="rounded-full bg-white/15 p-2 text-white backdrop-blur-md transition duration-300 hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+          <button type="button" onClick={onReadMore} aria-label="Read more about Izzul" className="rounded-full bg-white/15 p-2 text-white backdrop-blur-md transition duration-300 hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
             <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <line x1="7" y1="17" x2="17" y2="7" />
               <polyline points="7 7 17 7 17 17" />
             </svg>
-          </Link>
+          </button>
         </div>
         <div className="relative z-10 p-6">
           <p className="text-xs font-medium uppercase tracking-[0.16em] text-white/70">Behind the scenes</p>
@@ -367,7 +367,7 @@ function AboutBento() {
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-[320px_1fr] xl:grid-cols-[340px_1fr]">
           {/* ================= LEFT COLUMN: Fixed Profile & Info ================= */}
           <div className="flex flex-col gap-5">
-            <ProfileSlideshow />
+            <ProfileSlideshow onReadMore={() => openSection('about')} />
 
             {/* 2. Personal Info & Contact Card */}
             <motion.div
@@ -565,14 +565,21 @@ function AboutBento() {
                 className="relative z-10 col-start-1 row-start-1 min-w-0 rounded-[2rem] border border-black/[0.04] bg-surface p-5 shadow-sm sm:p-8"
               >
                 <div className="mb-7 flex items-center justify-between border-b border-black/[0.06] pb-4">
-                  <button
+                  <motion.button
                     ref={backButton}
                     type="button"
+                    aria-label="Back to overview"
+                    title="Back to overview"
                     onClick={closeSection}
-                    className="rounded-full bg-accent px-4 py-2 text-xs font-semibold text-white shadow-xs hover:bg-accent hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                    whileHover={reduceMotion ? undefined : { y: -2, scale: 1.03 }}
+                    whileTap={reduceMotion ? undefined : { y: 0, scale: 0.96 }}
+                    transition={hoverSpring}
+                    className="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full bg-accent text-white transition-colors duration-200 hover:bg-[#0077ED] active:bg-[#005BB5] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
                   >
-                    Back to overview
-                  </button>
+                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M19 12H5m7 7-7-7 7-7" />
+                    </svg>
+                  </motion.button>
                   <span className="text-[10px] font-semibold uppercase tracking-widest text-muted">Explore</span>
                 </div>
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: reduceMotion ? 0 : 0.2, delay: reduceMotion ? 0 : 0.12 }}>
@@ -620,7 +627,7 @@ function AboutBento() {
 
                     {/* Apple Cupertino Style Story Link Tile */}
                     <Link
-                      to="/about#stories"
+                      to="/stories"
                       className="group flex items-center justify-between rounded-2xl bg-white p-4 shadow-xs border border-black/[0.04] transition-all duration-300 hover:border-black/15 hover:shadow-sm"
                     >
                       <div className="flex items-center gap-3.5">
