@@ -14,6 +14,17 @@
   --font-serif: "Instrument Serif", Georgia, serif;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+@media (min-width: 1024px) {
+  html {
+    scroll-snap-type: y mandatory;
+    scroll-padding-top: 1rem;
+  }
+}
+
 body {
   background-color: var(--color-paper);
   color: var(--color-ink);

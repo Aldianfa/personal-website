@@ -227,10 +227,10 @@ function Home() {
     <main className="min-h-screen bg-paper">
       <NavBar />
 
-      <section className="mx-auto max-w-6xl px-6 pb-14 pt-16 md:pb-20 md:pt-24">
-        <div className="max-w-4xl">
-          <p className="text-sm font-semibold text-accent">Izzul is building a story archive.</p>
-          <h1 className="mt-5 text-5xl font-semibold leading-[1.08] tracking-tight md:text-7xl">
+      <section className="relative mx-auto flex min-h-[100dvh] w-full max-w-6xl snap-start snap-always flex-col justify-center px-6 pt-16 pb-4 sm:pt-20 sm:pb-6">
+        <div className="max-w-3xl">
+          <p className="text-xs sm:text-sm font-semibold text-accent">Izzul is building a story archive.</p>
+          <h1 className="mt-3 text-4xl font-semibold leading-[1.08] tracking-tight sm:text-5xl lg:text-[3.25rem] xl:text-[3.75rem]">
             Hi, I&apos;m Izzul.
             <br />
             A{' '}
@@ -260,17 +260,17 @@ function Home() {
             <br />
             a curious mind.
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted sm:text-base md:text-lg">
             A personal website for healthcare, systems, technology, and the small decisions
             behind meaningful projects.
           </p>
         </div>
 
-        <PortfolioKeyboard />
+        {/* <PortfolioKeyboard /> */}
       </section>
 
-      <section id="work" className="mx-auto max-w-6xl px-6 pb-24 md:pb-32">
-        <p className="mb-4 text-right text-xs text-muted">Click around...</p>
+      <section id="work" className="relative mx-auto flex min-h-[100dvh] w-full max-w-6xl snap-start snap-always flex-col justify-center px-6 py-8 md:py-12">
+        <p className="mb-2.5 text-right text-xs text-muted">Click around...</p>
 
         {/* 
           Bento Grid Layout (3x3 on lg):
@@ -278,7 +278,7 @@ function Home() {
           | Photo Tall (col 1, row 1-2) | Featured Project (col 2, row 2-3) | Small Status 2 (col 3, row 2) |
           | Download Me (col 1, row 3)  | Featured Project (col 2, row 2-3) | Spotify (col 3, row 3)        |
         */}
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1.25fr_1fr] lg:auto-rows-[14rem]">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_1.25fr_1fr] lg:gap-5 lg:auto-rows-[11.25rem] xl:auto-rows-[12.25rem]">
           {/* 1. Photo Stack: Col 1, Row 1-2 */}
           <BentoCard
             delay={0}

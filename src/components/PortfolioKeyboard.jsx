@@ -499,7 +499,7 @@ export default function PortfolioKeyboard() {
   }, [handleKeyAction])
 
   return (
-    <div className="relative mx-auto mt-6 mb-12 flex w-full max-w-2xl flex-col items-center">
+    <div className="relative mx-auto mt-3 mb-1 sm:mt-5 sm:mb-2 flex w-full max-w-md sm:max-w-lg lg:max-w-xl flex-col items-center">
       {/* 3D Keycap Illustrated Cluster (Exact Layout & Proportions from Reference) */}
       <div className="w-full drop-shadow-md">
         <svg
