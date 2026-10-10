@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 import PageTransition from './components/PageTransition'
+import CommandPalette from './components/CommandPalette'
 
 const Home = lazy(() => import('./pages/Home'))
 const About = lazy(() => import('./pages/About'))
@@ -79,6 +80,7 @@ function AnimatedRoutes() {
 function App() {
   return (
     <BrowserRouter>
+      <CommandPalette />
       <Suspense fallback={<div role="status" className="flex min-h-screen items-center justify-center bg-paper text-sm text-muted">Loading page...</div>}>
       <AnimatedRoutes />
       </Suspense>

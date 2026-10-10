@@ -74,7 +74,7 @@ function ProjectCard({ project, index }) {
           src={project.cover_image} alt={`${project.title} preview`}
           loading={index < 2 ? 'eager' : 'lazy'} decoding="async"
           onError={() => setFailedImage(true)}
-          
+
         /> : <div className="work-preview-empty">
           <svg aria-hidden="true" viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="8" y="12" width="48" height="40" rx="6" /><path d="M8 23h48M15 18h2m4 0h2M18 43l10-10 8 7 6-5 6 8" /></svg>
           <span className="text-xs text-muted">Preview coming soon</span>

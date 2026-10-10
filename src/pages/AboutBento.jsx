@@ -276,587 +276,587 @@ function AboutBento() {
 
   return (
     <MotionConfig reducedMotion="user">
-    <main className="min-h-screen bg-paper text-ink selection:bg-accent/15 selection:text-accent pb-20">
-      <NavBar />
+      <main className="min-h-screen bg-paper text-ink selection:bg-accent/15 selection:text-accent pb-20">
+        <NavBar />
 
-      <div className="mx-auto max-w-5xl px-4 pt-6 md:px-6 md:pt-10">
-        {/* Main Bento Layout Grid */}
-        <div className="grid grid-cols-1 gap-5 lg:grid-cols-[320px_1fr] xl:grid-cols-[340px_1fr]">
-          {/* ================= LEFT COLUMN: Fixed Profile & Info ================= */}
-          <div className="flex flex-col gap-5">
-            {/* 1. Full-Bleed Portrait Photo Card (Borderless) */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ y: -3, transition: hoverSpring }}
-              className="group relative aspect-3/4 w-full overflow-hidden rounded-[2rem] bg-panel text-white shadow-sm transition-shadow duration-500 hover:shadow-[0_24px_80px_rgba(29,29,31,0.12)]"
-            >
-              {/* Full-bleed Portrait Photo */}
-              <img
-                src="/profile.jpg"
-                alt="Izzul"
-                className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
-              />
-
-              {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/15 pointer-events-none" />
-
-              {/* Top Badge */}
-              <div className="relative z-10 flex items-center justify-between p-5">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-md border border-white/20 shadow-sm">
-                  About Me
-                </span>
-                <span className="rounded-full bg-white/15 p-1.5 text-white backdrop-blur-md">
-                  <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="7" y1="17" x2="17" y2="7" />
-                    <polyline points="7 7 17 7 17 17" />
-                  </svg>
-                </span>
-              </div>
-
-              {/* Bottom Info directly on Photo */}
-              <div className="absolute bottom-0 left-0 right-0 z-10 p-5">
-                <p className="text-xs font-medium uppercase tracking-[0.16em] text-white/70">
-                  Behind the scenes
-                </p>
-                <h3 className="mt-0.5 text-xl font-bold text-white">Who is Izzul?</h3>
-                <p className="mt-1 text-xs leading-relaxed text-white/80 line-clamp-2">
-                  Building systems, learning through experiments, and sharing stories.
-                </p>
-              </div>
-            </motion.div>
-
-            {/* 2. Personal Info & Contact Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-              whileHover={{ y: -3, transition: hoverSpring }}
-              className="flex flex-col justify-between rounded-[2rem] bg-surface p-6 transition-shadow duration-500 hover:shadow-[0_24px_80px_rgba(29,29,31,0.08)]"
-            >
-              <div>
-                <h1 className="text-2xl font-bold tracking-tight text-ink">Izzul</h1>
-                <p className="mt-0.5 text-xs font-semibold text-accent">
-                  Full-Stack Developer @ Medicare
-                </p>
-
-                {/* Key-Value Meta Rows */}
-                <div className="mt-6 space-y-2.5 border-t border-black/[0.06] pt-5 text-xs">
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium text-muted">Website</span>
-                    <a href="/" className="font-semibold text-ink hover:underline">
-                      izzul.dev
-                    </a>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium text-muted">Email</span>
-                    <button
-                      onClick={handleCopyEmail}
-                      className="font-semibold text-ink hover:text-accent transition-colors duration-200"
-                    >
-                      {copied ? (
-                        <span className="text-emerald-600 font-bold animate-in fade-in duration-200">
-                          Copied! ✓
-                        </span>
-                      ) : (
-                        'hi@example.com'
-                      )}
-                    </button>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium text-muted">Location</span>
-                    <span className="font-semibold text-ink">Indonesia / Remote</span>
-                  </div>
-
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium text-muted">Focus</span>
-                    <span className="font-semibold text-ink">HealthTech & Backend</span>
-                  </div>
-                </div>
-
-                {/* Social Icon Row */}
-                <div className="mt-6 flex items-center gap-2 border-t border-black/[0.06] pt-4">
-                  <motion.a
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    href="https://www.linkedin.com/in/izzul"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent/10 text-accent shadow-xs border border-black/[0.04] transition-colors hover:bg-accent hover:text-white"
-                    title="LinkedIn"
-                  >
-                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25a1.65 1.65 0 1 0 0 3.3 1.65 1.65 0 0 0 0-3.3Z" />
-                    </svg>
-                  </motion.a>
-
-                  <motion.a
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    href="https://github.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent/10 text-accent shadow-xs border border-black/[0.04] transition-colors hover:bg-accent hover:text-white"
-                    title="GitHub"
-                  >
-                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
-                    </svg>
-                  </motion.a>
-
-                  <motion.button
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={handleCopyEmail}
-                    className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent/10 text-accent shadow-xs border border-black/[0.04] transition-colors hover:bg-accent hover:text-white"
-                    title="Copy Email"
-                  >
-                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect x="2" y="4" width="20" height="16" rx="2" />
-                      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                    </svg>
-                  </motion.button>
-                </div>
-              </div>
-
-              {/* Download Resume Action Pill */}
-              <div className="mt-6 border-t border-black/[0.06] pt-4">
-                <motion.a
-                  whileHover={{ scale: 1.02, y: -2 }}
-                  whileTap={{ scale: 0.97 }}
-                  transition={hoverSpring}
-                  href="/cv.pdf"
-                  download="CV-Izzul.pdf"
-                  className="flex w-full items-center justify-center rounded-full bg-accent px-4 py-3 text-xs font-semibold text-white shadow-sm transition hover:bg-accent/85 hover:shadow-md"
-                >
-                  <span>Download Resume</span>
-
-                </motion.a>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* Only section cards participate in hover focus and expansion. */}
-          <div
-            ref={gridRef}
-            className="relative isolate min-w-0 scroll-mt-24 self-start grid"
-            onKeyDown={(event) => {
-              if (event.key === 'Escape' && activeSection) {
-                event.stopPropagation()
-                closeSection()
-              }
-            }}
-          >
-            <div
-              inert={activeSection ? true : undefined}
-              aria-hidden={activeSection ? true : undefined}
-              className={`col-start-1 row-start-1 grid grid-cols-1 gap-4 sm:grid-cols-2 ${activeSection ? 'invisible pointer-events-none' : ''}`}
-              onMouseLeave={() => setHoveredSection(null)}
-            >
-              {SECTIONS.map((section) => {
-                const dimmed = Boolean(emphasizedSection && emphasizedSection !== section.id)
-                return (
-                  <motion.button
-                    key={section.id}
-                    ref={(node) => { sectionButtons.current[section.id] = node }}
-                    type="button"
-                    layoutId={activeSection ? undefined : `bento-${section.id}`}
-                    transition={reduceMotion ? { duration: 0 } : springTransition}
-                    animate={{ opacity: dimmed ? 0.5 : 1, filter: dimmed ? 'blur(3px)' : 'blur(0px)', y: !reduceMotion && emphasizedSection === section.id ? -3 : 0 }}
-                    onHoverStart={() => {
-                      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) setHoveredSection(section.id)
-                    }}
-                    onHoverEnd={() => setHoveredSection(null)}
-                    onFocus={(event) => {
-                      if (event.currentTarget.matches(':focus-visible')) setFocusedSection(section.id)
-                    }}
-                    onBlur={() => setFocusedSection(null)}
-                    onClick={() => openSection(section.id)}
-                    aria-label={`Open ${section.label}`}
-                    aria-expanded={false}
-                    className={`group relative flex min-h-44 min-w-0 cursor-pointer flex-col items-start rounded-[2rem] border border-black/[0.04] bg-surface p-6 text-left transition-shadow hover:shadow-[0_16px_48px_rgba(29,29,31,0.10)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent ${section.size}`}
-                  >
-                    <span className="mb-5 flex w-full items-center justify-between gap-3">
-                      <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-xl text-accent shadow-xs" aria-hidden="true">{section.icon}</span>
-                      <span className="rounded-full bg-black/5 p-1.5 text-muted transition group-hover:bg-accent group-hover:text-white" aria-hidden="true">
-                        <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <line x1="7" y1="17" x2="17" y2="7" />
-                          <polyline points="7 7 17 7 17 17" />
-                        </svg>
-                      </span>
-                    </span>
-                    <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-muted">{section.eyebrow}</span>
-                    <span className="mt-2 text-xl font-bold tracking-tight text-ink">{section.label}</span>
-                    <span className="mt-2 text-sm leading-relaxed text-muted">{section.summary}</span>
-                    {section.id === 'work' && (
-                      <span className="my-6 space-y-4 border-l border-ink/10 pl-4">
-                        {WORK_EXPERIENCES.map((work) => (
-                          <span key={work.id} className="block">
-                            <span className="block text-[10px] font-semibold text-accent">{work.period}</span>
-                            <span className="mt-1 block text-xs font-semibold text-ink">{work.company}</span>
-                          </span>
-                        ))}
-                      </span>
-                    )}
-                    {section.id === 'stack' && (
-                      <span className="mt-5 flex flex-wrap gap-2" aria-hidden="true">
-                        {TECH_STACK_ITEMS.map((item) => (
-                          <span key={item.name} className={`flex h-9 w-9 items-center justify-center rounded-xl ${item.bg}`}>{item.icon}</span>
-                        ))}
-                      </span>
-                    )}
-                    <span className="mt-auto pt-5 text-[11px] font-semibold text-accent">{section.meta}</span>
-                  </motion.button>
-                )
-              })}
-            </div>
-
-            {activeSection && (
-              <motion.section
-                key={activeSection}
-                layoutId={`bento-${activeSection}`}
-                transition={reduceMotion ? { duration: 0 } : springTransition}
-                aria-label={SECTIONS.find((section) => section.id === activeSection).label}
-                className="relative z-10 col-start-1 row-start-1 min-w-0 rounded-[2rem] border border-black/[0.04] bg-surface p-5 shadow-sm sm:p-8"
+        <div className="mx-auto max-w-5xl px-4 pt-6 md:px-6 md:pt-10">
+          {/* Main Bento Layout Grid */}
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-[320px_1fr] xl:grid-cols-[340px_1fr]">
+            {/* ================= LEFT COLUMN: Fixed Profile & Info ================= */}
+            <div className="flex flex-col gap-5">
+              {/* 1. Full-Bleed Portrait Photo Card (Borderless) */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -3, transition: hoverSpring }}
+                className="group relative aspect-3/4 w-full overflow-hidden rounded-[2rem] bg-panel text-white shadow-sm transition-shadow duration-500 hover:shadow-[0_24px_80px_rgba(29,29,31,0.12)]"
               >
-                <div className="mb-7 flex items-center justify-between border-b border-black/[0.06] pb-4">
-                  <motion.button
-                    ref={backButton}
-                    type="button"
-                    aria-label="Back to overview"
-                    title="Back to overview"
-                    onClick={closeSection}
-                    whileHover={reduceMotion ? undefined : { y: -2, scale: 1.03 }}
-                    whileTap={reduceMotion ? undefined : { y: 0, scale: 0.96 }}
-                    transition={hoverSpring}
-                    className="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full bg-accent text-white transition-colors duration-200 hover:bg-[#0077ED] active:bg-[#005BB5] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
-                  >
-                    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <path d="M19 12H5m7 7-7-7 7-7" />
+                {/* Full-bleed Portrait Photo */}
+                <img
+                  src="/profile.jpg"
+                  alt="Izzul"
+                  className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                />
+
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/15 pointer-events-none" />
+
+                {/* Top Badge */}
+                <div className="relative z-10 flex items-center justify-between p-5">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white/20 px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-white backdrop-blur-md border border-white/20 shadow-sm">
+                    About Me
+                  </span>
+                  <span className="rounded-full bg-white/15 p-1.5 text-white backdrop-blur-md">
+                    <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="7" y1="17" x2="17" y2="7" />
+                      <polyline points="7 7 17 7 17 17" />
                     </svg>
-                  </motion.button>
-                  <span className="text-[10px] font-semibold uppercase tracking-widest text-muted">Explore</span>
+                  </span>
                 </div>
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: reduceMotion ? 0 : 0.2, delay: reduceMotion ? 0 : 0.12 }}>
-                {/* TAB 1: ABOUT & BIO */}
-                {activeSection === 'about' && (
-                  <motion.div
-                    key="about"
-                    initial={{ opacity: 0, y: 6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.22, ease: 'easeOut' }}
-                    className="space-y-5"
-                  >
-                    <h2 className="text-xl font-bold tracking-tight text-ink">
-                      About the Developer
-                    </h2>
 
-                    <blockquote className="rounded-2xl border-l-2 border-ink/20 bg-white p-4.5 text-sm font-medium leading-relaxed text-ink shadow-xs">
-                      "Hai, I'm Izzul. I engineer scalable clinical software and intuitive digital systems that solve complex real-world operational challenges."
-                    </blockquote>
-
-                    <p className="text-xs leading-relaxed text-muted md:text-sm">
-                      Specializing in backend monolith architectures with Laravel, Filament, and PostgreSQL,
-                      I focus on high-reliability healthcare systems, automated clinic workflows, and responsive
-                      user interfaces that reduce mental fatigue for operators.
-                    </p>
-
-                    <div className="grid grid-cols-2 gap-3 pt-1">
-                      <div className="rounded-2xl bg-white p-4 shadow-xs border border-black/[0.04]">
-                        <p className="text-[11px] font-bold uppercase tracking-wider text-muted">
-                          Philosophy
-                        </p>
-                        <p className="mt-1 text-xs font-semibold text-ink">
-                          Cognitive simplicity & relational data precision.
-                        </p>
-                      </div>
-                      <div className="rounded-2xl bg-white p-4 shadow-xs border border-black/[0.04]">
-                        <p className="text-[11px] font-bold uppercase tracking-wider text-muted">
-                          Domain
-                        </p>
-                        <p className="mt-1 text-xs font-semibold text-ink">
-                          Healthcare IT, EHR systems, and enterprise tools.
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Apple Cupertino Style Story Link Tile */}
-                    <Link
-                      to="/stories"
-                      className="group flex items-center justify-between rounded-2xl bg-white p-4 shadow-xs border border-black/[0.04] transition-all duration-300 hover:border-black/15 hover:shadow-sm"
-                    >
-                      <div className="flex items-center gap-3.5">
-                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface text-ink shadow-xs border border-black/[0.04] transition-transform duration-300 group-hover:scale-105">
-                          <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z" />
-                            <path d="M6 6h10" />
-                            <path d="M6 10h10" />
-                          </svg>
-                        </div>
-                        <div>
-                          <div className="flex items-center gap-1.5">
-                            <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-muted">
-                              Story Logs
-                            </span>
-                            <span className="text-ink/20">•</span>
-                            <span className="text-xs font-semibold text-accent">Chapters</span>
-                          </div>
-                          <p className="mt-0.5 text-xs font-medium text-ink">
-                            Read retrospective case studies & project decisions
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-surface text-ink shadow-xs border border-black/[0.04] transition-all duration-300 group-hover:bg-accent group-hover:text-white group-hover:translate-x-1">
-                        <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                          <line x1="5" y1="12" x2="19" y2="12" />
-                          <polyline points="12 5 19 12 12 19" />
-                        </svg>
-                      </div>
-                    </Link>
-                  </motion.div>
-                )}
-
-                {/* TAB 2: WORK EXPERIENCE (EXPANDABLE ACCORDION) */}
-                {activeSection === 'work' && (
-                  <motion.div
-                    key="work"
-                    initial={{ opacity: 0, y: 6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.22, ease: 'easeOut' }}
-                    className="space-y-4"
-                  >
-                    <div className="flex items-center justify-between">
-                      <h2 className="text-xl font-bold tracking-tight text-ink">Work Experience</h2>
-                      <span className="text-[11px] font-medium text-muted">Click to expand details</span>
-                    </div>
-
-                    <div className="space-y-3">
-                      {WORK_EXPERIENCES.map((work) => {
-                        const isExpanded = Boolean(expandedWork[work.id])
-
-                        return (
-                          <motion.div
-                            key={work.id}
-                            layout="position"
-                            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                            className="rounded-2xl bg-white p-4.5 shadow-xs border border-black/[0.04] transition-all duration-200 hover:border-black/15 md:p-5"
-                          >
-                            {/* Accordion Header (Clickable) */}
-                            <div
-                              role="button"
-                              tabIndex={0}
-                              aria-expanded={isExpanded}
-                              aria-label={`${work.company}: ${isExpanded ? 'collapse' : 'expand'} details`}
-                              onKeyDown={(event) => {
-                                if (event.key === 'Enter' || event.key === ' ') {
-                                  event.preventDefault()
-                                  toggleWork(work.id)
-                                }
-                              }}
-                              onClick={() => toggleWork(work.id)}
-                              className="flex cursor-pointer flex-wrap items-start justify-between gap-3 rounded-lg select-none focus-visible:outline-2 focus-visible:outline-accent"
-                            >
-                              <div>
-                                <div className="flex items-center gap-2">
-                                  <h3 className="text-sm font-bold text-ink md:text-base">
-                                    {work.company}
-                                  </h3>
-                                </div>
-                                <p className="text-xs font-semibold text-accent">{work.role}</p>
-                              </div>
-
-                              <div className="flex items-center gap-2">
-                                <span className="rounded-full bg-surface px-2.5 py-0.5 text-[11px] font-semibold text-muted shadow-xs border border-black/[0.04]">
-                                  {work.period}
-                                </span>
-                                {/* Smooth Rotating Toggle Chevron */}
-                                <motion.div
-                                  animate={{ rotate: isExpanded ? 180 : 0 }}
-                                  transition={{ duration: 0.2, ease: 'easeOut' }}
-                                  className="flex h-6 w-6 items-center justify-center rounded-full bg-surface text-muted shadow-xs border border-black/[0.04]"
-                                >
-                                  <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                                    <polyline points="6 9 12 15 18 9" />
-                                  </svg>
-                                </motion.div>
-                              </div>
-                            </div>
-
-                            <p className="mt-2 text-xs leading-relaxed text-muted">
-                              {work.description}
-                            </p>
-
-                            {/* Accordion Body */}
-                            <AnimatePresence initial={false}>
-                              {isExpanded && (
-                                <motion.div
-                                  initial={{ opacity: 0, height: 0 }}
-                                  animate={{ opacity: 1, height: 'auto' }}
-                                  exit={{ opacity: 0, height: 0 }}
-                                  transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                                  className="overflow-hidden"
-                                >
-                                  <div className="mt-3.5 border-t border-black/[0.06] pt-3">
-                                    <p className="text-[10px] font-bold uppercase tracking-wider text-muted">
-                                      Key Impact & Responsibilities
-                                    </p>
-                                    <ul className="mt-2 space-y-1.5">
-                                      {work.achievements.map((item, i) => (
-                                        <li key={i} className="flex items-start gap-2 text-xs leading-relaxed text-ink/80">
-                                          <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
-                                          <span>{item}</span>
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  </div>
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
-
-                            {/* Skills Tags */}
-                            <div className="mt-3 flex flex-wrap gap-1.5 pt-2">
-                              {work.skills.map((skill) => (
-                                <span
-                                  key={skill}
-                                  className="rounded-lg bg-surface px-2.5 py-0.5 text-[10px] font-medium text-ink/75 border border-black/[0.04] shadow-xs cursor-default"
-                                >
-                                  {skill}
-                                </span>
-                              ))}
-                            </div>
-                          </motion.div>
-                        )
-                      })}
-                    </div>
-                  </motion.div>
-                )}
-
-                {/* TAB 3: EDUCATION */}
-                {activeSection === 'education' && (
-                  <motion.div
-                    key="education"
-                    initial={{ opacity: 0, y: 6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.22, ease: 'easeOut' }}
-                    className="space-y-5"
-                  >
-                    <h2 className="text-xl font-bold tracking-tight text-ink">
-                      Academic Background
-                    </h2>
-
-                    <div className="space-y-4">
-                      {EDUCATION_DATA.map((edu, idx) => (
-                        <div
-                          key={idx}
-                          className="rounded-2xl bg-white p-5 shadow-xs border border-black/[0.04]"
-                        >
-                          <div className="flex flex-wrap items-baseline justify-between gap-2">
-                            <h3 className="text-base font-bold text-ink">{edu.degree}</h3>
-                            <span className="rounded-full bg-surface px-2.5 py-0.5 text-[11px] font-semibold text-ink shadow-xs">
-                              {edu.period}
-                            </span>
-                          </div>
-                          <p className="mt-1 text-xs font-semibold text-muted">{edu.institution} • {edu.location}</p>
-                          <p className="mt-3 text-xs leading-relaxed text-muted">
-                            {edu.description}
-                          </p>
-
-                          <div className="mt-4 border-t border-black/[0.06] pt-3">
-                            <p className="text-[10px] font-bold uppercase tracking-wider text-muted">
-                              Core Focus Areas
-                            </p>
-                            <div className="mt-2 flex flex-wrap gap-1.5">
-                              {edu.modules.map((mod) => (
-                                <span
-                                  key={mod}
-                                  className="rounded-lg bg-surface px-2.5 py-1 text-[11px] font-medium text-ink shadow-xs border border-black/[0.04]"
-                                >
-                                  {mod}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-
-                {/* TAB 4: AWARDS */}
-                {activeSection === 'awards' && (
-                  <motion.div
-                    key="awards"
-                    initial={{ opacity: 0, y: 6 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.22, ease: 'easeOut' }}
-                    className="space-y-4"
-                  >
-                    <div className="flex items-center justify-between">
-                      <h2 className="text-xl font-bold tracking-tight text-ink">
-                        Honors & Awards
-                      </h2>
-                      <span className="text-[11px] font-medium text-muted">
-                        {AWARDS_DATA.length} Recognitions
-                      </span>
-                    </div>
-
-                    <div className="space-y-3">
-                      {AWARDS_DATA.map((award, idx) => (
-                        <div
-                          key={idx}
-                          className="flex items-start gap-4 rounded-2xl bg-white p-4.5 shadow-xs border border-black/[0.04] transition-colors hover:border-black/15"
-                        >
-                          {/* Award Squircle Icon */}
-                          <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${award.iconBg} shadow-xs`}>
-                            {award.icon}
-                          </div>
-
-                          <div className="flex-1 min-w-0">
-                            <div className="flex flex-wrap items-baseline justify-between gap-2">
-                              <h3 className="text-sm font-bold text-ink">{award.title}</h3>
-                              <span className="rounded-full bg-surface px-2.5 py-0.5 text-[10px] font-semibold text-muted shadow-xs border border-black/[0.04]">
-                                {award.period}
-                              </span>
-                            </div>
-                            <p className="text-xs font-semibold text-accent">{award.issuer}</p>
-                            <p className="mt-1.5 text-xs leading-relaxed text-muted">
-                              {award.description}
-                            </p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-                {activeSection === 'stack' && (
-                  <div className="space-y-5">
-                    <h2 className="text-xl font-bold tracking-tight text-ink">Tech Stack</h2>
-                    <p className="text-sm leading-relaxed text-muted">The tools behind my clinical systems, web applications, and automated workflows.</p>
-                    <div className="grid gap-3 sm:grid-cols-2">
-                      {TECH_STACK_ITEMS.map((item) => (
-                        <div key={item.name} className="flex items-center gap-3 rounded-2xl border border-black/[0.04] bg-white p-4">
-                          <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${item.bg}`}>{item.icon}</div>
-                          <div className="min-w-0">
-                            <h3 className="text-sm font-bold text-ink">{item.name}</h3>
-                            <p className="mt-1 text-xs text-muted">{item.category}</p>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
+                {/* Bottom Info directly on Photo */}
+                <div className="absolute bottom-0 left-0 right-0 z-10 p-5">
+                  <p className="text-xs font-medium uppercase tracking-[0.16em] text-white/70">
+                    Behind the scenes
+                  </p>
+                  <h3 className="mt-0.5 text-xl font-bold text-white">Who is Izzul?</h3>
+                  <p className="mt-1 text-xs leading-relaxed text-white/80 line-clamp-2">
+                    Building systems, learning through experiments, and sharing stories.
+                  </p>
+                </div>
               </motion.div>
 
-              </motion.section>
-            )}
+              {/* 2. Personal Info & Contact Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+                whileHover={{ y: -3, transition: hoverSpring }}
+                className="flex flex-col justify-between rounded-[2rem] bg-surface p-6 transition-shadow duration-500 hover:shadow-[0_24px_80px_rgba(29,29,31,0.08)]"
+              >
+                <div>
+                  <h1 className="text-2xl font-bold tracking-tight text-ink">Izzul</h1>
+                  <p className="mt-0.5 text-xs font-semibold text-accent">
+                    Full-Stack Developer @ Medicare
+                  </p>
+
+                  {/* Key-Value Meta Rows */}
+                  <div className="mt-6 space-y-2.5 border-t border-black/[0.06] pt-5 text-xs">
+                    <div className="flex items-center justify-between">
+                      <span className="font-medium text-muted">Website</span>
+                      <a href="/" className="font-semibold text-ink hover:underline">
+                        izzul.dev
+                      </a>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <span className="font-medium text-muted">Email</span>
+                      <button
+                        onClick={handleCopyEmail}
+                        className="font-semibold text-ink hover:text-accent transition-colors duration-200"
+                      >
+                        {copied ? (
+                          <span className="text-emerald-600 font-bold animate-in fade-in duration-200">
+                            Copied! ✓
+                          </span>
+                        ) : (
+                          'hi@example.com'
+                        )}
+                      </button>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <span className="font-medium text-muted">Location</span>
+                      <span className="font-semibold text-ink">Indonesia / Remote</span>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <span className="font-medium text-muted">Focus</span>
+                      <span className="font-semibold text-ink">HealthTech & Backend</span>
+                    </div>
+                  </div>
+
+                  {/* Social Icon Row */}
+                  <div className="mt-6 flex items-center gap-2 border-t border-black/[0.06] pt-4">
+                    <motion.a
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      href="https://www.linkedin.com/in/izzul"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent/10 text-accent shadow-xs border border-black/[0.04] transition-colors hover:bg-accent hover:text-white"
+                      title="LinkedIn"
+                    >
+                      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25a1.65 1.65 0 1 0 0 3.3 1.65 1.65 0 0 0 0-3.3Z" />
+                      </svg>
+                    </motion.a>
+
+                    <motion.a
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      href="https://github.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent/10 text-accent shadow-xs border border-black/[0.04] transition-colors hover:bg-accent hover:text-white"
+                      title="GitHub"
+                    >
+                      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+                      </svg>
+                    </motion.a>
+
+                    <motion.button
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={handleCopyEmail}
+                      className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent/10 text-accent shadow-xs border border-black/[0.04] transition-colors hover:bg-accent hover:text-white"
+                      title="Copy Email"
+                    >
+                      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <rect x="2" y="4" width="20" height="16" rx="2" />
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                      </svg>
+                    </motion.button>
+                  </div>
+                </div>
+
+                {/* Download Resume Action Pill */}
+                <div className="mt-6 border-t border-black/[0.06] pt-4">
+                  <motion.a
+                    whileHover={{ scale: 1.02, y: -2 }}
+                    whileTap={{ scale: 0.97 }}
+                    transition={hoverSpring}
+                    href="/cv.pdf"
+                    download="CV-Izzul.pdf"
+                    className="flex w-full items-center justify-center rounded-full bg-accent px-4 py-3 text-xs font-semibold text-white shadow-sm transition hover:bg-accent/85 hover:shadow-md"
+                  >
+                    <span>Download Resume</span>
+
+                  </motion.a>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Only section cards participate in hover focus and expansion. */}
+            <div
+              ref={gridRef}
+              className="relative isolate min-w-0 scroll-mt-24 self-start grid"
+              onKeyDown={(event) => {
+                if (event.key === 'Escape' && activeSection) {
+                  event.stopPropagation()
+                  closeSection()
+                }
+              }}
+            >
+              <div
+                inert={activeSection ? true : undefined}
+                aria-hidden={activeSection ? true : undefined}
+                className={`col-start-1 row-start-1 grid grid-cols-1 gap-4 sm:grid-cols-2 ${activeSection ? 'invisible pointer-events-none' : ''}`}
+                onMouseLeave={() => setHoveredSection(null)}
+              >
+                {SECTIONS.map((section) => {
+                  const dimmed = Boolean(emphasizedSection && emphasizedSection !== section.id)
+                  return (
+                    <motion.button
+                      key={section.id}
+                      ref={(node) => { sectionButtons.current[section.id] = node }}
+                      type="button"
+                      layoutId={activeSection ? undefined : `bento-${section.id}`}
+                      transition={reduceMotion ? { duration: 0 } : springTransition}
+                      animate={{ opacity: dimmed ? 0.5 : 1, filter: dimmed ? 'blur(3px)' : 'blur(0px)', y: !reduceMotion && emphasizedSection === section.id ? -3 : 0 }}
+                      onHoverStart={() => {
+                        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) setHoveredSection(section.id)
+                      }}
+                      onHoverEnd={() => setHoveredSection(null)}
+                      onFocus={(event) => {
+                        if (event.currentTarget.matches(':focus-visible')) setFocusedSection(section.id)
+                      }}
+                      onBlur={() => setFocusedSection(null)}
+                      onClick={() => openSection(section.id)}
+                      aria-label={`Open ${section.label}`}
+                      aria-expanded={false}
+                      className={`group relative flex min-h-44 min-w-0 cursor-pointer flex-col items-start rounded-[2rem] border border-black/[0.04] bg-surface p-6 text-left transition-shadow hover:shadow-[0_16px_48px_rgba(29,29,31,0.10)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent ${section.size}`}
+                    >
+                      <span className="mb-5 flex w-full items-center justify-between gap-3">
+                        <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-white text-xl text-accent shadow-xs" aria-hidden="true">{section.icon}</span>
+                        <span className="rounded-full bg-black/5 p-1.5 text-muted transition group-hover:bg-accent group-hover:text-white" aria-hidden="true">
+                          <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="7" y1="17" x2="17" y2="7" />
+                            <polyline points="7 7 17 7 17 17" />
+                          </svg>
+                        </span>
+                      </span>
+                      <span className="text-[10px] font-bold uppercase tracking-[0.16em] text-muted">{section.eyebrow}</span>
+                      <span className="mt-2 text-xl font-bold tracking-tight text-ink">{section.label}</span>
+                      <span className="mt-2 text-sm leading-relaxed text-muted">{section.summary}</span>
+                      {section.id === 'work' && (
+                        <span className="my-6 space-y-4 border-l border-ink/10 pl-4">
+                          {WORK_EXPERIENCES.map((work) => (
+                            <span key={work.id} className="block">
+                              <span className="block text-[10px] font-semibold text-accent">{work.period}</span>
+                              <span className="mt-1 block text-xs font-semibold text-ink">{work.company}</span>
+                            </span>
+                          ))}
+                        </span>
+                      )}
+                      {section.id === 'stack' && (
+                        <span className="mt-5 flex flex-wrap gap-2" aria-hidden="true">
+                          {TECH_STACK_ITEMS.map((item) => (
+                            <span key={item.name} className={`flex h-9 w-9 items-center justify-center rounded-xl ${item.bg}`}>{item.icon}</span>
+                          ))}
+                        </span>
+                      )}
+                      <span className="mt-auto pt-5 text-[11px] font-semibold text-accent">{section.meta}</span>
+                    </motion.button>
+                  )
+                })}
+              </div>
+
+              {activeSection && (
+                <motion.section
+                  key={activeSection}
+                  layoutId={`bento-${activeSection}`}
+                  transition={reduceMotion ? { duration: 0 } : springTransition}
+                  aria-label={SECTIONS.find((section) => section.id === activeSection).label}
+                  className="relative z-10 col-start-1 row-start-1 min-w-0 rounded-[2rem] border border-black/[0.04] bg-surface p-5 shadow-sm sm:p-8"
+                >
+                  <div className="mb-7 flex items-center justify-between border-b border-black/[0.06] pb-4">
+                    <motion.button
+                      ref={backButton}
+                      type="button"
+                      aria-label="Back to overview"
+                      title="Back to overview"
+                      onClick={closeSection}
+                      whileHover={reduceMotion ? undefined : { y: -2, scale: 1.03 }}
+                      whileTap={reduceMotion ? undefined : { y: 0, scale: 0.96 }}
+                      transition={hoverSpring}
+                      className="flex h-8 w-8 shrink-0 cursor-pointer items-center justify-center rounded-full bg-accent text-white transition-colors duration-200 hover:bg-[#0077ED] active:bg-[#005BB5] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                    >
+                      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M19 12H5m7 7-7-7 7-7" />
+                      </svg>
+                    </motion.button>
+                    <span className="text-[10px] font-semibold uppercase tracking-widest text-muted">Explore</span>
+                  </div>
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: reduceMotion ? 0 : 0.2, delay: reduceMotion ? 0 : 0.12 }}>
+                    {/* TAB 1: ABOUT & BIO */}
+                    {activeSection === 'about' && (
+                      <motion.div
+                        key="about"
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.22, ease: 'easeOut' }}
+                        className="space-y-5"
+                      >
+                        <h2 className="text-xl font-bold tracking-tight text-ink">
+                          About the Developer
+                        </h2>
+
+                        <blockquote className="rounded-2xl border-l-2 border-ink/20 bg-white p-4.5 text-sm font-medium leading-relaxed text-ink shadow-xs">
+                          "Hai, I'm Izzul. I engineer scalable clinical software and intuitive digital systems that solve complex real-world operational challenges."
+                        </blockquote>
+
+                        <p className="text-xs leading-relaxed text-muted md:text-sm">
+                          Specializing in backend monolith architectures with Laravel, Filament, and PostgreSQL,
+                          I focus on high-reliability healthcare systems, automated clinic workflows, and responsive
+                          user interfaces that reduce mental fatigue for operators.
+                        </p>
+
+                        <div className="grid grid-cols-2 gap-3 pt-1">
+                          <div className="rounded-2xl bg-white p-4 shadow-xs border border-black/[0.04]">
+                            <p className="text-[11px] font-bold uppercase tracking-wider text-muted">
+                              Philosophy
+                            </p>
+                            <p className="mt-1 text-xs font-semibold text-ink">
+                              Cognitive simplicity & relational data precision.
+                            </p>
+                          </div>
+                          <div className="rounded-2xl bg-white p-4 shadow-xs border border-black/[0.04]">
+                            <p className="text-[11px] font-bold uppercase tracking-wider text-muted">
+                              Domain
+                            </p>
+                            <p className="mt-1 text-xs font-semibold text-ink">
+                              Healthcare IT, EHR systems, and enterprise tools.
+                            </p>
+                          </div>
+                        </div>
+
+                        {/* Apple Cupertino Style Story Link Tile */}
+                        <Link
+                          to="/stories"
+                          className="group flex items-center justify-between rounded-2xl bg-white p-4 shadow-xs border border-black/[0.04] transition-all duration-300 hover:border-black/15 hover:shadow-sm"
+                        >
+                          <div className="flex items-center gap-3.5">
+                            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-surface text-ink shadow-xs border border-black/[0.04] transition-transform duration-300 group-hover:scale-105">
+                              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z" />
+                                <path d="M6 6h10" />
+                                <path d="M6 10h10" />
+                              </svg>
+                            </div>
+                            <div>
+                              <div className="flex items-center gap-1.5">
+                                <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-muted">
+                                  Story Logs
+                                </span>
+                                <span className="text-ink/20">•</span>
+                                <span className="text-xs font-semibold text-accent">Chapters</span>
+                              </div>
+                              <p className="mt-0.5 text-xs font-medium text-ink">
+                                Read retrospective case studies & project decisions
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-surface text-ink shadow-xs border border-black/[0.04] transition-all duration-300 group-hover:bg-accent group-hover:text-white group-hover:translate-x-1">
+                            <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                              <line x1="5" y1="12" x2="19" y2="12" />
+                              <polyline points="12 5 19 12 12 19" />
+                            </svg>
+                          </div>
+                        </Link>
+                      </motion.div>
+                    )}
+
+                    {/* TAB 2: WORK EXPERIENCE (EXPANDABLE ACCORDION) */}
+                    {activeSection === 'work' && (
+                      <motion.div
+                        key="work"
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.22, ease: 'easeOut' }}
+                        className="space-y-4"
+                      >
+                        <div className="flex items-center justify-between">
+                          <h2 className="text-xl font-bold tracking-tight text-ink">Work Experience</h2>
+                          <span className="text-[11px] font-medium text-muted">Click to expand details</span>
+                        </div>
+
+                        <div className="space-y-3">
+                          {WORK_EXPERIENCES.map((work) => {
+                            const isExpanded = Boolean(expandedWork[work.id])
+
+                            return (
+                              <motion.div
+                                key={work.id}
+                                layout="position"
+                                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                                className="rounded-2xl bg-white p-4.5 shadow-xs border border-black/[0.04] transition-all duration-200 hover:border-black/15 md:p-5"
+                              >
+                                {/* Accordion Header (Clickable) */}
+                                <div
+                                  role="button"
+                                  tabIndex={0}
+                                  aria-expanded={isExpanded}
+                                  aria-label={`${work.company}: ${isExpanded ? 'collapse' : 'expand'} details`}
+                                  onKeyDown={(event) => {
+                                    if (event.key === 'Enter' || event.key === ' ') {
+                                      event.preventDefault()
+                                      toggleWork(work.id)
+                                    }
+                                  }}
+                                  onClick={() => toggleWork(work.id)}
+                                  className="flex cursor-pointer flex-wrap items-start justify-between gap-3 rounded-lg select-none focus-visible:outline-2 focus-visible:outline-accent"
+                                >
+                                  <div>
+                                    <div className="flex items-center gap-2">
+                                      <h3 className="text-sm font-bold text-ink md:text-base">
+                                        {work.company}
+                                      </h3>
+                                    </div>
+                                    <p className="text-xs font-semibold text-accent">{work.role}</p>
+                                  </div>
+
+                                  <div className="flex items-center gap-2">
+                                    <span className="rounded-full bg-surface px-2.5 py-0.5 text-[11px] font-semibold text-muted shadow-xs border border-black/[0.04]">
+                                      {work.period}
+                                    </span>
+                                    {/* Smooth Rotating Toggle Chevron */}
+                                    <motion.div
+                                      animate={{ rotate: isExpanded ? 180 : 0 }}
+                                      transition={{ duration: 0.2, ease: 'easeOut' }}
+                                      className="flex h-6 w-6 items-center justify-center rounded-full bg-surface text-muted shadow-xs border border-black/[0.04]"
+                                    >
+                                      <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                                        <polyline points="6 9 12 15 18 9" />
+                                      </svg>
+                                    </motion.div>
+                                  </div>
+                                </div>
+
+                                <p className="mt-2 text-xs leading-relaxed text-muted">
+                                  {work.description}
+                                </p>
+
+                                {/* Accordion Body */}
+                                <AnimatePresence initial={false}>
+                                  {isExpanded && (
+                                    <motion.div
+                                      initial={{ opacity: 0, height: 0 }}
+                                      animate={{ opacity: 1, height: 'auto' }}
+                                      exit={{ opacity: 0, height: 0 }}
+                                      transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                                      className="overflow-hidden"
+                                    >
+                                      <div className="mt-3.5 border-t border-black/[0.06] pt-3">
+                                        <p className="text-[10px] font-bold uppercase tracking-wider text-muted">
+                                          Key Impact & Responsibilities
+                                        </p>
+                                        <ul className="mt-2 space-y-1.5">
+                                          {work.achievements.map((item, i) => (
+                                            <li key={i} className="flex items-start gap-2 text-xs leading-relaxed text-ink/80">
+                                              <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+                                              <span>{item}</span>
+                                            </li>
+                                          ))}
+                                        </ul>
+                                      </div>
+                                    </motion.div>
+                                  )}
+                                </AnimatePresence>
+
+                                {/* Skills Tags */}
+                                <div className="mt-3 flex flex-wrap gap-1.5 pt-2">
+                                  {work.skills.map((skill) => (
+                                    <span
+                                      key={skill}
+                                      className="rounded-lg bg-surface px-2.5 py-0.5 text-[10px] font-medium text-ink/75 border border-black/[0.04] shadow-xs cursor-default"
+                                    >
+                                      {skill}
+                                    </span>
+                                  ))}
+                                </div>
+                              </motion.div>
+                            )
+                          })}
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {/* TAB 3: EDUCATION */}
+                    {activeSection === 'education' && (
+                      <motion.div
+                        key="education"
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.22, ease: 'easeOut' }}
+                        className="space-y-5"
+                      >
+                        <h2 className="text-xl font-bold tracking-tight text-ink">
+                          Academic Background
+                        </h2>
+
+                        <div className="space-y-4">
+                          {EDUCATION_DATA.map((edu, idx) => (
+                            <div
+                              key={idx}
+                              className="rounded-2xl bg-white p-5 shadow-xs border border-black/[0.04]"
+                            >
+                              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                                <h3 className="text-base font-bold text-ink">{edu.degree}</h3>
+                                <span className="rounded-full bg-surface px-2.5 py-0.5 text-[11px] font-semibold text-ink shadow-xs">
+                                  {edu.period}
+                                </span>
+                              </div>
+                              <p className="mt-1 text-xs font-semibold text-muted">{edu.institution} • {edu.location}</p>
+                              <p className="mt-3 text-xs leading-relaxed text-muted">
+                                {edu.description}
+                              </p>
+
+                              <div className="mt-4 border-t border-black/[0.06] pt-3">
+                                <p className="text-[10px] font-bold uppercase tracking-wider text-muted">
+                                  Core Focus Areas
+                                </p>
+                                <div className="mt-2 flex flex-wrap gap-1.5">
+                                  {edu.modules.map((mod) => (
+                                    <span
+                                      key={mod}
+                                      className="rounded-lg bg-surface px-2.5 py-1 text-[11px] font-medium text-ink shadow-xs border border-black/[0.04]"
+                                    >
+                                      {mod}
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {/* TAB 4: AWARDS */}
+                    {activeSection === 'awards' && (
+                      <motion.div
+                        key="awards"
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.22, ease: 'easeOut' }}
+                        className="space-y-4"
+                      >
+                        <div className="flex items-center justify-between">
+                          <h2 className="text-xl font-bold tracking-tight text-ink">
+                            Honors & Awards
+                          </h2>
+                          <span className="text-[11px] font-medium text-muted">
+                            {AWARDS_DATA.length} Recognitions
+                          </span>
+                        </div>
+
+                        <div className="space-y-3">
+                          {AWARDS_DATA.map((award, idx) => (
+                            <div
+                              key={idx}
+                              className="flex items-start gap-4 rounded-2xl bg-white p-4.5 shadow-xs border border-black/[0.04] transition-colors hover:border-black/15"
+                            >
+                              {/* Award Squircle Icon */}
+                              <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl ${award.iconBg} shadow-xs`}>
+                                {award.icon}
+                              </div>
+
+                              <div className="flex-1 min-w-0">
+                                <div className="flex flex-wrap items-baseline justify-between gap-2">
+                                  <h3 className="text-sm font-bold text-ink">{award.title}</h3>
+                                  <span className="rounded-full bg-surface px-2.5 py-0.5 text-[10px] font-semibold text-muted shadow-xs border border-black/[0.04]">
+                                    {award.period}
+                                  </span>
+                                </div>
+                                <p className="text-xs font-semibold text-accent">{award.issuer}</p>
+                                <p className="mt-1.5 text-xs leading-relaxed text-muted">
+                                  {award.description}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                    {activeSection === 'stack' && (
+                      <div className="space-y-5">
+                        <h2 className="text-xl font-bold tracking-tight text-ink">Tech Stack</h2>
+                        <p className="text-sm leading-relaxed text-muted">The tools behind my clinical systems, web applications, and automated workflows.</p>
+                        <div className="grid gap-3 sm:grid-cols-2">
+                          {TECH_STACK_ITEMS.map((item) => (
+                            <div key={item.name} className="flex items-center gap-3 rounded-2xl border border-black/[0.04] bg-white p-4">
+                              <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ${item.bg}`}>{item.icon}</div>
+                              <div className="min-w-0">
+                                <h3 className="text-sm font-bold text-ink">{item.name}</h3>
+                                <p className="mt-1 text-xs text-muted">{item.category}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </motion.div>
+
+                </motion.section>
+              )}
+            </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
     </MotionConfig>
   )
 }

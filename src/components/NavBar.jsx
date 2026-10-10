@@ -56,6 +56,21 @@ function NavBar() {
         >
           Contact
         </a>
+        <button
+          type="button"
+          onClick={() => window.dispatchEvent(new CustomEvent('open-command-palette'))}
+          className="shrink-0 flex cursor-pointer items-center gap-1.5 rounded-full px-2 py-1 sm:px-2.5 sm:py-1.5 text-xs font-semibold text-ink/50 hover:bg-white/50 hover:text-ink transition duration-300"
+          title="Quick search & actions (⌘K / Ctrl+K)"
+          aria-label="Open command palette"
+        >
+          <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="11" cy="11" r="8" />
+            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+          </svg>
+          <kbd className="hidden sm:inline-block rounded border border-black/10 bg-black/5 px-1.5 py-0.5 font-mono text-[9px] text-ink/70">
+            ⌘K
+          </kbd>
+        </button>
       </nav>
     </header>
   )
