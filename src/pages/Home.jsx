@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { getAllStories, getFeaturedProject } from '../lib/queries'
 import NavBar from '../components/NavBar'
 import SpotifyCard from '../components/SpotifyCard'
 import JourneyPhotoStack from '../components/JourneyPhotoStack'
+import PortfolioKeyboard from '../components/PortfolioKeyboard'
 
 function BentoCard({
   children,
@@ -162,9 +163,8 @@ function TechFocusCard() {
             <button
               key={i}
               onClick={() => setCurrentIndex(i)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === currentIndex ? 'w-4 bg-ink' : 'w-1.5 bg-ink/15 hover:bg-ink/30'
-              }`}
+              className={`h-1.5 rounded-full transition-all duration-300 ${i === currentIndex ? 'w-4 bg-ink' : 'w-1.5 bg-ink/15 hover:bg-ink/30'
+                }`}
               aria-label={`Jump to ${TECH_ITEMS[i].name}`}
             />
           ))}
@@ -206,6 +206,7 @@ function Home() {
   const [stories, setStories] = useState([])
   const [featuredProject, setFeaturedProject] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [isVibeHovered, setIsVibeHovered] = useState(false)
 
   useEffect(() => {
     async function fetchData() {
@@ -229,14 +230,43 @@ function Home() {
       <section className="mx-auto max-w-6xl px-6 pb-14 pt-16 md:pb-20 md:pt-24">
         <div className="max-w-4xl">
           <p className="text-sm font-semibold text-accent">Izzul is building a story archive.</p>
-          <h1 className="mt-5 text-5xl font-semibold leading-[0.98] md:text-7xl">
-            I write about the work, lessons, and turns that shaped how I think.
+          <h1 className="mt-5 text-5xl font-semibold leading-[1.08] tracking-tight md:text-7xl">
+            Hi, I&apos;m Izzul.
+            <br />
+            A{' '}
+            <Link
+              to="/story/1"
+              onMouseEnter={() => setIsVibeHovered(true)}
+              onMouseLeave={() => setIsVibeHovered(false)}
+              onFocus={() => setIsVibeHovered(true)}
+              onBlur={() => setIsVibeHovered(false)}
+              className="group relative inline-flex items-baseline font-serif italic text-[#c85378] transition-colors duration-200 hover:text-[#9e2b50] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent pr-1"
+              aria-label="Story: vibe coder"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={isVibeHovered ? 'hovered' : 'normal'}
+                  initial={{ opacity: 0, y: 4, filter: 'blur(2px)' }}
+                  animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                  exit={{ opacity: 0, y: -4, filter: 'blur(2px)' }}
+                  transition={{ duration: 0.2, ease: 'easeOut' }}
+                  className="inline-block"
+                >
+                  {isVibeHovered ? 'software developer' : 'vibe coder'}
+                </motion.span>
+              </AnimatePresence>
+            </Link>{' '}
+            with
+            <br />
+            a curious mind.
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted md:text-xl">
             A personal website for healthcare, systems, technology, and the small decisions
             behind meaningful projects.
           </p>
         </div>
+
+        <PortfolioKeyboard />
       </section>
 
       <section id="work" className="mx-auto max-w-6xl px-6 pb-24 md:pb-32">

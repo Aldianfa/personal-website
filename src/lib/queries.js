@@ -21,7 +21,7 @@ export async function getStoryBySlug(slug) {
     .eq('slug', slug)
     .eq('is_published', true)
     .order('sort_order', { referencedTable: 'story_sections', ascending: true })
-    .single()
+    .maybeSingle()
 
   if (error) {
     console.error('Error fetching story:', error)
