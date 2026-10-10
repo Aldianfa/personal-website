@@ -1,11 +1,42 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import { motion, useScroll, useSpring } from 'framer-motion'
 import { getStoryBySlug, getAllStories } from '../lib/queries'
 import NavBar from '../components/NavBar'
+import Footer from '../components/Footer'
 import StorySection from '../components/story/StorySection'
 
+function calculateReadingTime(story) {
+  if (!story) return null
+  let words = 0
+  const addWords = (text) => {
+    if (typeof text === 'string') {
+      words += text.trim().split(/\s+/).filter(Boolean).length
+    }
+  }
+  addWords(story.title)
+  addWords(story.short_summary)
+  if (Array.isArray(story.story_sections)) {
+    story.story_sections.forEach((sec) => {
+      addWords(sec.heading)
+      addWords(sec.content)
+      if (sec.metadata?.attribution) addWords(sec.metadata.attribution)
+      if (Array.isArray(sec.metadata?.items)) {
+        sec.metadata.items.forEach((item) => {
+          addWords(item.value)
+          addWords(item.label)
+        })
+      }
+    })
+  }
+  const minutes = Math.max(1, Math.ceil(words / 180))
+  return `⏱️ ${minutes} min read`
+}
+
 function MetadataChips({ story }) {
+  const readingTime = calculateReadingTime(story)
   const chips = [
+    readingTime,
     story.period_label,
     story.category,
     story.role,
@@ -34,6 +65,13 @@ function StoryDetail() {
   const [story, setStory] = useState(null)
   const [chapters, setChapters] = useState([])
   const [loading, setLoading] = useState(true)
+
+  const { scrollYProgress } = useScroll()
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  })
 
   useEffect(() => {
     let cancelled = false
@@ -71,7 +109,15 @@ function StoryDetail() {
 
   return (
     <article className="min-h-screen bg-paper">
+      {/* Top Reading Progress Bar */}
+      <motion.div
+        className="fixed inset-x-0 top-0 z-50 h-1 bg-accent origin-left"
+        style={{ scaleX }}
+        aria-hidden="true"
+      />
+
       <NavBar />
+
       <section className="px-6 pt-8 pb-16 md:pt-10 md:pb-24">
         <div className="mx-auto max-w-6xl">
           <Link
@@ -125,6 +171,7 @@ function StoryDetail() {
           ))}
         </div>
       </section>
+
       <nav aria-label="Chapter navigation" className="mx-auto max-w-3xl px-6 pb-20">
         <div className="border-t border-ink/10 pt-8">
           <p className="mb-6 text-xs font-semibold uppercase tracking-[0.16em] text-muted">Continue the journey</p>
@@ -145,6 +192,8 @@ function StoryDetail() {
           <Link to="/stories" className="mt-8 inline-block text-sm text-accent hover:underline">All chapters</Link>
         </div>
       </nav>
+
+      <Footer />
     </article>
   )
 }

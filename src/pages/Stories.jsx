@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import NavBar from '../components/NavBar'
 import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
-import { getAllStories } from '../lib/queries'
+import { getAllStories, calculateReadingTime } from '../lib/queries'
+import NavBar from '../components/NavBar'
+import Footer from '../components/Footer'
 
 function Stories() {
   const reduceMotion = useReducedMotion()
@@ -29,9 +30,9 @@ function Stories() {
   }, [attempt])
 
   return (
-    <main className="min-h-screen bg-paper pb-20 text-ink">
+    <main className="min-h-screen bg-paper pb-0 text-ink">
       <NavBar />
-      <section className="mx-auto max-w-5xl px-4 pt-12 md:px-6 md:pt-16" aria-labelledby="stories-heading">
+      <section className="mx-auto max-w-5xl px-4 pt-12 md:px-6 md:pt-16 pb-20" aria-labelledby="stories-heading">
         <header className="mb-16 max-w-3xl md:mb-24">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">A journal by Izzul</p>
           <h1 id="stories-heading" className="mt-5 text-4xl font-semibold leading-[1.08] tracking-tight md:text-6xl">Every chapter shaped the next.</h1>
@@ -80,7 +81,17 @@ function Stories() {
                       transition={{ duration: reduceMotion ? 0 : 0.45 }}
                     >
                       <Link to={`/story/${story.slug}`} className="group block min-w-0 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-8 focus-visible:outline-accent">
-                        {story.category && <p className="mb-3 text-xs font-medium text-accent">{story.category}</p>}
+                        <div className="mb-3 flex flex-wrap items-center gap-2.5 text-xs">
+                          {story.category && <span className="font-semibold text-accent">{story.category}</span>}
+                          {story.category && <span className="text-ink/20">•</span>}
+                          <span className="inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-white/70 px-2.5 py-0.5 text-[11px] font-medium text-ink/70 backdrop-blur-sm">
+                            <svg className="h-3 w-3 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <circle cx="12" cy="12" r="10" />
+                              <polyline points="12 6 12 12 16 14" />
+                            </svg>
+                            {calculateReadingTime(story)}
+                          </span>
+                        </div>
                         <h2 className="break-words text-2xl font-semibold leading-tight tracking-tight transition-colors duration-200 group-hover:text-accent group-focus-visible:text-accent md:text-4xl">{story.title}</h2>
                         {story.short_summary && <p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted md:text-base">{story.short_summary}</p>}
                         {story.cover_image && (
@@ -100,6 +111,8 @@ function Stories() {
           )}
         </div>
       </section>
+
+      <Footer />
     </main>
   )
 }
